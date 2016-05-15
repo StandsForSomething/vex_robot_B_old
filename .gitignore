@@ -1,0 +1,12 @@
+#object files
+*.o
+
+#binary files
+*.bin
+
+#executable and linkable files
+*.elf
+
+#emacs autosave
+[#]*[#]
+*~
