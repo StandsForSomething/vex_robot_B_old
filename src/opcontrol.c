@@ -1,3 +1,4 @@
+
 /** @file opcontrol.c
  * @brief File for operator control code
  *
@@ -23,7 +24,7 @@
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
  * DISCLAIMED. IN NO EVENT SHALL PURDUE UNIVERSITY ACM SIG BOTS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL,a EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
@@ -130,11 +131,6 @@ void operatorControl()
                 setMotor(RFDrive,  C1LY - C1LX - C1RX);    //right front wheel
                 setMotor(RBDrive,  C1LY + C1LX - C1RX);	   //right back wheel
                 setMotor(LBDrive,  C1LY - C1LX + C1RX);	   //left back wheel
-	      
-                setMotor(FLDrive,  C1LY + C1LX + C1RX);    //front left wheel
-                setMotor(FRDrive,  C1LY - C1LX - C1RX);	   //front right wheel
-                setMotor(BRDrive,  C1LY + C1LX - C1RX);	   //back right wheel
-                setMotor(BLDrive,  C1LY - C1LX + C1RX);	   //back left  wheel
                 break;
 				
             case LEFT: // Second Mode (8L)
@@ -144,11 +140,6 @@ void operatorControl()
                 setMotor(RFDrive,  C1LY + C1LX - C1RX);    //right front wheel
                 setMotor(RBDrive, -C1LY + C1LX - C1RX);    //right back wheel
                 setMotor(LBDrive,  C1LY + C1LX + C1RX);    //left back wheel
-	      
-                setMotor(FLDrive, -C1LY + C1LX + C1RX);    //front left wheel
-                setMotor(FRDrive,  C1LY + C1LX - C1RX);	   //front right wheel
-                setMotor(BRDrive, -C1LY + C1LX - C1RX);	   //back right wheel
-                setMotor(BLDrive,  C1LY + C1LX + C1RX);	   //back left  wheel
                 break;
 
             case RIGHT: // Third Mode (8R)
@@ -158,11 +149,6 @@ void operatorControl()
                 setMotor(RFDrive, -C1LY - C1LX - C1RX);    //right front wheel
                 setMotor(RBDrive,  C1LY - C1LX - C1RX);    //right back wheel
                 setMotor(LBDrive, -C1LY - C1LX + C1RX);    //left back wheel
-	      
-                setMotor(FLDrive,  C1LY - C1LX + C1RX);    //front left wheel
-                setMotor(FRDrive, -C1LY - C1LX - C1RX);	   //front right wheel
-                setMotor(BRDrive,  C1LY - C1LX - C1RX);	   //back right wheel
-                setMotor(BLDrive, -C1LY - C1LX + C1RX);	   //back left  wheel
                 break;
 
             case BACK: // Fourth Mode (8D)
@@ -171,12 +157,7 @@ void operatorControl()
                 setMotor(LFDrive, -C1LY - C1LX + C1RX);	   //left front wheel
                 setMotor(RFDrive, -C1LY + C1LX - C1RX);    //right front wheel
                 setMotor(RBDrive, -C1LY - C1LX - C1RX);	   //right back wheel
-                setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel
-	      
-                setMotor(FLDrive, -C1LY - C1LX + C1RX);    //front left wheel
-                setMotor(FRDrive, -C1LY + C1LX - C1RX);	   //front right wheel
-                setMotor(BRDrive, -C1LY - C1LX - C1RX);	   //back right wheel
-                setMotor(BLDrive, -C1LY + C1LX + C1RX);	   //back left  wheel   
+                setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel   
                 break;
             }
         }
@@ -188,46 +169,12 @@ void operatorControl()
             setMotor(RFDrive, 0);
             setMotor(RBDrive, 0);
             setMotor(LBDrive, 0);
-            setMotor(FLDrive, 0);
-            setMotor(FRDrive, 0);
-            setMotor(BRDrive, 0);
-            setMotor(BLDrive, 0);
         }
 
         //////////////////
-        //Winch/Punchers//
-        /////////////////////////////////////////////////////////////////////////
-        //dont get confused becuase the only motors being set are for the      //
-        //winch.  The punchers and winch are on the same ports (two different  //
-        //configurations) and it's designed so that if we forget to put in the //
-        //configuration jumper we can still operate.                           //
-        /////////////////////////////////////////////////////////////////////////
-        
-        //if button 5U is pressed
-        if(C1_5U)
-        {
-            //pull the ramp in
-            setMotor(winch1, 127);
-            setMotor(winch2, 127);
-        }
-
-        //if button 5D is pressed and our current confuration is for the ramp
-        else if(C1_5D && useRamp)
-        {
-            //let the ramp out
-            setMotor(winch1, -127);
-            setMotor(winch2, -127);
-        }
-
-        //if no button related to the movement of the ramp is pressed, or if we
-        //are not using the ramp and button 5D is pressed.
-        else if(useRamp || (!useRamp && C1_5D))
-        {
-            //stop the motors
-            setMotor(winch1, 0);
-            setMotor(winch2, 0);
-        }
-        
+        //Conveyor belt //
+        //////////////////
+	
         //motors can only be updated every 20 milliseconds
         delay(20);
     }

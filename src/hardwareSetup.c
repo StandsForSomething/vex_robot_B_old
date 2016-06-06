@@ -7,28 +7,6 @@
 
 #include "main.h"
 
-bool useRamp;
-
-//////////
-//motors//
-////////////////////////////////////////////////////////////////
-//this may be a bit confusing with an 8 motor drive. I made a //
-//diagram showing the name of each motor and it's port number.//
-//the slashes and backslashes represent the meccanum wheels.  //
-//the real names used in the program are abreveiated, for     //
-//example FLDrive is front left and LFdrive is left front.    //
-////////////////////////////////////////////////////////////////
-//       front left(8)---v           v-------front right(9)   //
-//                     |\\\|       |///|                      //
-//                     |---------------|                      //
-//   left front(7)   \\|               |//   right front(2)   //
-//                   \\|               |//                    //
-//                   --|               |--                    //
-//   left back(6)    //|               |\\   right back(3)    //
-//                   //|_______________|\\                    //
-//                     |///|       |\\\|                      //
-//       back left(5)----^           ^-------back right(4)    //
-////////////////////////////////////////////////////////////////
 
 typedef struct motor
 {
@@ -36,34 +14,21 @@ typedef struct motor
     bool reversed;
 }motor;
 
-//the winch and punchers are assigned to the same port. this is becuase there are
-//two different configurations for the robot, one with punchers and one a ramp
-//that uses a two motor winch
+//back conveyor belt motors
+motor RBConveyer = {2, false};
+motor LBConveyer = {3, true};
 
-//winch
-motor winch1 = {1, false};
-motor winch2 = {10, true};
-
-//punchers
-motor puncher1 = {1, false};
-motor puncher2 = {10, true};
+//front conveyor belt motors
+motor RFConveyer = {4, false};
+motor LFConveyer = {5, true};
 
 //right motors
-motor RFDrive = {2, true};
-motor RBDrive = {3, true};
-
-//back motors
-motor BRDrive = {4, true};
-motor BLDrive = {5, false};
+motor RFDrive = {5, true};
+motor RBDrive = {7, true};
 
 //left motors
-motor LBDrive = {6, false};
-motor LFDrive = {7, false};
-
-//front motors
-motor FLDrive = {8, false};
-motor FRDrive = {9, true};
-
+motor LBDrive = {8, false};
+motor LFDrive = {9, false};
 
 ///////////
 //sensors//

@@ -78,17 +78,6 @@ void initializeIO()
  */
 void initialize()
 {
-    //if we want to use the punchers
-    if(getSensor(configJumper))
-        useRamp = false;
-
-    //if we want to use the ramp
-    else
-        useRamp = true;
-    
-    //initialize motor encoders
-    imeInitializeAll();
-
     //start the timer task
     taskCreate(timeLoop, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 }

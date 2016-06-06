@@ -22,10 +22,6 @@ void driveMove(direction direction, int speed)
         setMotor(LBDrive, speed);
         setMotor(RFDrive, speed);
         setMotor(RBDrive, speed);
-        setMotor(FLDrive, speed);
-        setMotor(FRDrive, speed);
-        setMotor(BLDrive, speed);
-        setMotor(BRDrive, speed);
         break;
 
     case BACKWARD:
@@ -33,10 +29,6 @@ void driveMove(direction direction, int speed)
         setMotor(LBDrive, -speed);
         setMotor(RFDrive, -speed);
         setMotor(RBDrive, -speed);
-        setMotor(FLDrive, -speed);
-        setMotor(FRDrive, -speed);
-        setMotor(BLDrive, -speed);
-        setMotor(BRDrive, -speed);
         break;
 
     case LEFT:
@@ -44,10 +36,6 @@ void driveMove(direction direction, int speed)
         setMotor(LBDrive,  speed);
         setMotor(RFDrive,  speed);
         setMotor(RBDrive, -speed);
-        setMotor(FLDrive, -speed);
-        setMotor(FRDrive,  speed);
-        setMotor(BLDrive,  speed);
-        setMotor(BRDrive, -speed);
         break;
 
     case RIGHT:
@@ -55,10 +43,6 @@ void driveMove(direction direction, int speed)
         setMotor(LBDrive, -speed);
         setMotor(RFDrive, -speed);
         setMotor(RBDrive,  speed);
-        setMotor(FLDrive,  speed);
-        setMotor(FRDrive, -speed);
-        setMotor(BLDrive, -speed);
-        setMotor(BRDrive,  speed);
         break;
 
     case TURN_LEFT:
@@ -66,10 +50,6 @@ void driveMove(direction direction, int speed)
         setMotor(LBDrive, -speed);
         setMotor(RFDrive,  speed);
         setMotor(RBDrive,  speed);
-        setMotor(FLDrive, -speed);
-        setMotor(FRDrive,  speed);
-        setMotor(BLDrive,  speed);
-        setMotor(BRDrive, -speed);
         break;
 
     case TURN_RIGHT:
@@ -77,10 +57,6 @@ void driveMove(direction direction, int speed)
         setMotor(LBDrive,  speed);
         setMotor(RFDrive, -speed);
         setMotor(RBDrive, -speed);
-        setMotor(FLDrive,  speed);
-        setMotor(FRDrive, -speed);
-        setMotor(BLDrive, -speed);
-        setMotor(BRDrive,  speed);
         break;
     }
 }
@@ -92,10 +68,6 @@ void driveStop()
     setMotor(LBDrive, 0);
     setMotor(RFDrive, 0);
     setMotor(RBDrive, 0);
-    setMotor(FLDrive, 0);
-    setMotor(FRDrive, 0);
-    setMotor(BLDrive, 0);
-    setMotor(BRDrive, 0);
 }
 
 //calls driveMove until the robots destination

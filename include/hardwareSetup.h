@@ -1,29 +1,6 @@
 #ifndef HARDWARESETUP_H_
 #define HARDWARESETUP_H_
 
-extern bool useRamp;
-
-//////////
-//motors//
-////////////////////////////////////////////////////////////////
-//this may be a bit confusing with an 8 motor drive. I made a //
-//diagram showing the name of each motor and it's port number.//
-//the slashes and backslashes represent the meccanum wheels.  //
-//the real names used in the program are abreveiated, for     //
-//example FLDrive is front left and LFdrive is left front.    //
-////////////////////////////////////////////////////////////////
-//       front left(8)---v           v-------front right(9)   //
-//                     |\\\|       |///|                      //
-//                     |---------------|                      //
-//   left front(7)   \\|               |//   right front(2)   //
-//                   \\|               |//                    //
-//                   --|               |--                    //
-//   left back(6)    //|               |\\   right back(3)    //
-//                   //|_______________|\\                    //
-//                     |///|       |\\\|                      //
-//       back left(5)----^           ^-------back right(4)    //
-////////////////////////////////////////////////////////////////
-
 //motor structure
 typedef struct motor
 {
@@ -31,33 +8,21 @@ typedef struct motor
 	bool reversed;
 }motor;
 
-//the winch and punchers are assigned to the same port. this is becuase there are
-//two different configurations for the robot, one with punchers and one a ramp
-//that uses a two motor winch
+//back conveyor belt motors
+extern motor RBConveyer;
+extern motor LBConveyer;
 
-//winch
-extern motor winch1;      //port 1, not reversed
-extern motor winch2;      //port 10, reversed
-
-//punchers
-extern motor puncher1;    //port 1, not reversed
-extern motor puncher2;    //port 10, reversed
+//front conveyor belt motors
+extern motor RFConveyer;
+extern motor LFConveyer;
 
 //right motors
 extern motor RFDrive;     //port 2, reversed
 extern motor RBDrive;     //port 3, reversed
 
-//back motors
-extern motor BRDrive;     //port 4, reversed
-extern motor BLDrive;     //port 5, not reversed
-
 //left motors
 extern motor LBDrive;     //port 6, not reversed
 extern motor LFDrive;     //port 7, not reversed
-
-//front motors
-extern motor FLDrive;     //port 8, not reversed
-extern motor FRDrive;     //port 9, reversed
 
 ///////////
 //sensors//
