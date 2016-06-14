@@ -61,5 +61,10 @@ typedef struct motor
 void setMotor(struct motor motor, int speed);
 double getSensor(struct sensor sensor);
 void setOutput(struct sensor sensor, bool value);
+void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
+                 motorGearing motorGearing, encoderType encoderType,
+                 encoderGetType encoderGetType, float gearRatio);
+double getEncoder(sensor encoderParent);
+double getEncoderMode(sensor encoderParent, encoderGetType encoderGetType);
 
 #endif //HARDWARESETUP_H_

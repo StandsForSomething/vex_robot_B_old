@@ -1,7 +1,5 @@
 #include "main.h"
 
-double getEncoder();
-
 //initializes an encoder
 void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
                  motorGearing motorGearing, encoderType encoderType,
@@ -57,7 +55,54 @@ void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
     *initEncoder = tempEncoder;
 }
 
-double getEncoderMode(sensor encoderParent, encoderGetType encoderGetType);
+
+
+void setMotor(struct motor theMotor, int speed)
+{
+    motorSet(theMotor.port, theMotor.reversed ? -speed : speed);
+}
+
+void writeDigital(struct sensor sensor, bool value)
+{
+    //if HIGH should be written as LOW and vise versa
+    if(sensor.reversed)
+        //make sure the correct value is written
+        digitalWrite(sensor.port, value ? HIGH : LOW);
+
+    //if HIGH should be written as HIGH and LOw should be written as LOW
+    else
+        //write the value
+        digitalWrite(sensor.port, value);
+}
+
+double getSensor(struct sensor sensor)
+{
+    double sensorValue;
+
+    //if sensor is digital and not reversed
+    if(sensor.sensorType == DIGITAL && !sensor.reversed)
+        return(digitalRead(sensor.port));
+
+    //if the sensor is digital and reversed
+    else if(sensor.sensorType == DIGITAL)
+        return digitalRead(sensor.port) ? false : true;
+
+    //if the sensor is analog
+    else if(sensor.sensorType == ANALOG)
+        sensorValue = analogRead(sensor.port);
+
+    //if the sensor is another type use it's own specific function
+    //(sensor.sensorValue() is a pointer)
+    else if(sensor.sensorType == OTHER)
+        sensorValue = sensor.sensorValue(sensor);
+
+    //if the sensorType is something un expected
+    else
+        sensorValue = 0;
+
+    //reverse the sensor value if needed.
+    return sensor.reversed ? -sensorValue : sensorValue;
+}
 
 //a wrapper for getEncoderMode with the encoder's default encoderGetType
 double getEncoder(sensor encoderParent)
@@ -160,51 +205,4 @@ double getEncoderMode(sensor encoderParent, encoderGetType encoderGetType)
 
     
     return encoder.parent.reversed ? -returnValue : returnValue;
-}
-
-void setMotor(struct motor theMotor, int speed)
-{
-    motorSet(theMotor.port, theMotor.reversed ? -speed : speed);
-}
-
-void writeDigital(struct sensor sensor, bool value)
-{
-    //if HIGH should be written as LOW and vise versa
-    if(sensor.reversed)
-        //make sure the correct value is written
-        digitalWrite(sensor.port, value ? HIGH : LOW);
-
-    //if HIGH should be written as HIGH and LOw should be written as LOW
-    else
-        //write the value
-        digitalWrite(sensor.port, value);
-}
-
-double getSensor(struct sensor sensor)
-{
-    double sensorValue;
-
-    //if sensor is digital and not reversed
-    if(sensor.sensorType == DIGITAL && !sensor.reversed)
-        return(digitalRead(sensor.port));
-
-    //if the sensor is digital and reversed
-    else if(sensor.sensorType == DIGITAL)
-        return digitalRead(sensor.port) ? false : true;
-
-    //if the sensor is analog
-    else if(sensor.sensorType == ANALOG)
-        sensorValue = analogRead(sensor.port);
-
-    //if the sensor is another type use it's own specific function
-    //(sensor.sensorValue() is a pointer)
-    else if(sensor.sensorType == OTHER)
-        sensorValue = sensor.sensorValue(sensor);
-
-    //if the sensorType is something un expected
-    else
-        sensorValue = 0;
-
-    //reverse the sensor value if needed.
-    return sensor.reversed ? -sensorValue : sensorValue;
 }
