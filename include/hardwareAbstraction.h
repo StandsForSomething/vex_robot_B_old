@@ -66,5 +66,13 @@ void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
                  encoderGetType encoderGetType, float gearRatio);
 double getEncoder(sensor encoderParent);
 double getEncoderMode(sensor encoderParent, encoderGetType encoderGetType);
-
+void initEncoderIme(encoder *encoder, int port, bool reversed,
+                    motorGearing motorGearing, encoderGetType encoderGetType,
+                    float gearRatio);
+void initEncoderTW(encoder *encoder, int port1, int port2, bool reversed,
+                    motorGearing motorGearing, encoderGetType encoderGetType,
+                   float gearRatio);
+void initEncoderOW(encoder *encoder, int port, bool reversed,
+                    motorGearing motorGearing, encoderGetType encoderGetType,
+                   float gearRatio);
 #endif //HARDWARESETUP_H_
