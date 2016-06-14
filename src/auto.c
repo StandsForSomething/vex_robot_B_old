@@ -35,8 +35,6 @@
  */
 
 #include "main.h"
-#include "movement.h"
-#include "hardwareSetup.h"
 
 /*
  * Runs the user autonomous code. This function will be started in its own task

@@ -37,13 +37,6 @@
 //the main header file for every file in a PROS project
 #include "main.h"
 
-//no timers are used during initialization but the
-//task for incrementing timers is started here
-#include "timers.h"
-
-//has definitions for I/O pins
-#include "hardwareSetup.h"
-
 /*
  * Runs pre-initialization code. This function will be started in kernel mode one
  * time while the VEX Cortex is starting up. As the scheduler is still paused,
@@ -58,8 +51,6 @@ void initializeIO()
 {
     pinMode(POWER_EXPAND_JUMP, INPUT);
     pinMode(CONFIG_JUMP, INPUT);
-    pinMode(TILE_SELECT, INPUT_ANALOG);
-    pinMode(MOVE_SELECT, INPUT_ANALOG);
     pinMode(POWER_EXPAND, INPUT_ANALOG);
 }
 
@@ -78,6 +69,5 @@ void initializeIO()
  */
 void initialize()
 {
-    //start the timer task
-    taskCreate(timeLoop, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+    
 }
