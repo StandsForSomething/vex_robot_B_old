@@ -44,12 +44,8 @@
 #define MAIN_H_
 
 #include <API.h>
-<<<<<<< Updated upstream
 #include "hardwareAbstraction.h"
 #include "motorsAndSensors.h"
-=======
-#include "hardwareSetup.h"
->>>>>>> Stashed changes
 #include "joystick.h"
 
 // Allow usage of this file in C++ programs
