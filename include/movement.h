@@ -1,6 +1,6 @@
 #ifndef MOVEMENT_H_
 #define MOVEMENT_H_
-#include "hardwareSetup.h"
+#include "main.h"
 typedef enum direction
 {
     FORWARD, BACKWARD, LEFT, RIGHT, TURN_LEFT, TURN_RIGHT

@@ -2,7 +2,6 @@
 //this file contains functions for moving the robot autonomously//
 //////////////////////////////////////////////////////////////////
 #include "main.h"
-#include "hardwareSetup.h"
 
 //enumeration for different movement directions
 typedef enum direction

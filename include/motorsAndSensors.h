@@ -1,12 +1,5 @@
-#ifndef HARDWARESETUP_H_
-#define HARDWARESETUP_H_
-
-//motor structure
-typedef struct motor
-{
-	int port;
-	bool reversed;
-}motor;
+#ifndef MOTORS_H_
+#define MOTORS_H_
 
 //right motors
 extern motor RFDrive;     //port 2, reversed
@@ -24,21 +17,6 @@ extern motor armRO;
 extern motor armLI;
 extern motor armRI;
 
-///////////
-//sensors//
-///////////
-
-//well, technically DIGITAL_OUT isn't a sensor but whatever.
-typedef enum sensorType {ANALOG, DIGITAL, DIGITAL_OUT}sensorType;
-
-//sensor structure
-typedef struct sensor
-{
-    int port;
-    sensorType sensortype;
-    bool reversed;
-}sensor;
-
 //digital
 //extern sensor powerExpandJumper;    //digital port 1, input, reversed
 
@@ -53,11 +31,3 @@ typedef struct sensor
 //#define TILE_SELECT 13         //analog port 1
 //#define MOVE_SELECT 14         //analog port 2
 //#define POWER_EXPAND 15        //analog port 3
-
-
-//function prototypes
-extern void setMotor(struct motor theMotor, int speed);
-extern int getSensor(struct sensor theSensor);
-extern void setOutput(struct sensor theSensor, bool value);
-
-#endif //HARDWARESETUP_H_
