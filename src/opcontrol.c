@@ -79,11 +79,7 @@ void operatorControl()
     //this makes sure the robot can't move unless the issue is fixed becuase once
     //the robot moves it can't legally be fixed.  The option of using a jumper to
     //continue is incase the issue can't be fixed.
-    while(getSensor(powerExpand) < 1000 && !getSensor(powerExpandJumper))
-    {
-        printf("test");
-        delay(1);
-    }
+    //while(getSensor(powerExpand) < 1000 && !getSensor(powerExpandJumper)){delay(1)}
 
 
     //control loop
@@ -171,9 +167,31 @@ void operatorControl()
             setMotor(LBDrive, 0);
         }
 
-        //////////////////
-        //Conveyor belt //
-        //////////////////
+        ////////////
+        //arm code//
+        ////////////
+
+        //raise arm
+        if(C1_5U)
+        {
+            setMotor(armLY, 127);
+            setMotor(armRY, 127);
+            setMotor(armLO, 127);
+            setMotor(armRO, 127);
+            setMotor(armLI, 127);
+            setMotor(armRI, 127);
+        }
+
+        //lower arm
+        if(C1_5D)
+        {
+            setMotor(armLY, -127);
+            setMotor(armRY, -127);
+            setMotor(armLO, -127);
+            setMotor(armRO, -127);
+            setMotor(armLI, -127);
+            setMotor(armRI, -127);
+        }
 	
         //motors can only be updated every 20 milliseconds
         delay(20);

@@ -56,11 +56,10 @@
  */
 void initializeIO()
 {
-    pinMode(POWER_EXPAND_JUMP, INPUT);
-    pinMode(CONFIG_JUMP, INPUT);
-    pinMode(TILE_SELECT, INPUT_ANALOG);
-    pinMode(MOVE_SELECT, INPUT_ANALOG);
-    pinMode(POWER_EXPAND, INPUT_ANALOG);
+    /* pinMode(POWER_EXPAND_JUMP, INPUT); */
+    /* pinMode(TILE_SELECT, INPUT_ANALOG); */
+    /* pinMode(MOVE_SELECT, INPUT_ANALOG); */
+    /* pinMode(POWER_EXPAND, INPUT_ANALOG); */
 }
 
 /*
@@ -78,6 +77,5 @@ void initializeIO()
  */
 void initialize()
 {
-    //start the timer task
-    taskCreate(timeLoop, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
 }

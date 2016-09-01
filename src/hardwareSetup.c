@@ -14,27 +14,26 @@ typedef struct motor
     bool reversed;
 }motor;
 
-//back conveyor belt motors
-motor RBConveyor = {2, false};
-motor LBConveyor = {3, true};
-
-//front conveyor belt motors
-motor RFConveyor = {4, false};
-motor LFConveyor = {5, true};
-
 //right motors
-motor RFDrive = {5, true};
-motor RBDrive = {7, true};
+motor RFDrive = {2, true};
+motor RBDrive = {3, true};
 
 //left motors
-motor LBDrive = {8, false};
-motor LFDrive = {9, false};
+motor LBDrive = {4, false};
+motor LFDrive = {5, false};
+
+//arm motors
+motor armLY = {6,  false};
+motor armRY = {7,  false};
+motor armLO = {8,  false};
+motor armRO = {9,  false};
+motor armLI = {1,  true};
+motor armRI = {10, true};
 
 ///////////
 //sensors//
 ///////////
 
-//well, technically DIGITAL_OUT isn't a sensor but whatever.
 typedef enum sensorType {ANALOG, DIGITAL, DIGITAL_OUT, IME, QUAD_ENC}sensorType;
 
 //structure for sensors
@@ -46,23 +45,12 @@ typedef struct sensor
 }sensor;
 
 //digital
-sensor powerExpandJumper = {1, DIGITAL, true};
-sensor configJumper = {2,DIGITAL, true};
+//sensor powerExpandJumper = {1, DIGITAL, true};
 
 //analog
-sensor tileSelect = {1, ANALOG, false};
-sensor movementSelect = {2, ANALOG, false};
-sensor powerExpand = {3, ANALOG, false};
-
-//IME's
-sensor RFenc = {0, IME, false};
-sensor RBenc = {1, IME, false};
-sensor BRenc = {2, IME, false};
-sensor BLenc = {3, IME, false};
-sensor LBenc = {4, IME, false};
-sensor LFenc = {5, IME, false};
-sensor FLenc = {6, IME, false};
-sensor FRenc = {7, IME, false};
+//sensor tileSelect = {1, ANALOG, false};
+//sensor movementSelect = {2, ANALOG, false};
+//sensor powerExpand = {3, ANALOG, false};
 
 void setMotor(struct motor theMotor, int speed)
 {

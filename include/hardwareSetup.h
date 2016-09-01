@@ -8,14 +8,6 @@ typedef struct motor
 	bool reversed;
 }motor;
 
-//back conveyor belt motors
-extern motor RBConveyor;
-extern motor LBConveyor;
-
-//front conveyor belt motors
-extern motor RFConveyor;
-extern motor LFConveyor;
-
 //right motors
 extern motor RFDrive;     //port 2, reversed
 extern motor RBDrive;     //port 3, reversed
@@ -23,6 +15,14 @@ extern motor RBDrive;     //port 3, reversed
 //left motors
 extern motor LBDrive;     //port 6, not reversed
 extern motor LFDrive;     //port 7, not reversed
+
+//arm motors
+extern motor armLY;
+extern motor armRY;
+extern motor armLO;
+extern motor armRO;
+extern motor armLI;
+extern motor armRI;
 
 ///////////
 //sensors//
@@ -40,31 +40,19 @@ typedef struct sensor
 }sensor;
 
 //digital
-extern sensor powerExpandJumper;    //digital port 1, input, reversed
-extern sensor configJumper;         //digital port 2, imput, reversed
+//extern sensor powerExpandJumper;    //digital port 1, input, reversed
 
 //analog
-extern sensor tileSelect;        //analog port 1, not reversed
-extern sensor movementSelect;    //analog port 2, not reversed
-extern sensor powerExpand;     //analog port 3, not reversed
-
-//IME's
-extern sensor RFenc;    //IME, I2C 0, not reversed
-extern sensor RBenc;    //IME, I2C 1, not reversed
-extern sensor BRenc;    //IME, I2C 2, not reversed
-extern sensor BLenc;    //IME, I2C 3, not reversed
-extern sensor LBenc;    //IME, I2C 4, not reversed
-extern sensor LFenc;    //IME, I2C 5, not reversed
-extern sensor FLenc;    //IME, I2C 6, not reversed
-extern sensor FRenc;    //IME, I2C 7, not reversed
+//extern sensor tileSelect;        //analog port 1, not reversed
+//extern sensor movementSelect;    //analog port 2, not reversed
+//extern sensor powerExpand;     //analog port 3, not reversed
 
 //definition for cortex pins
-#define POWER_EXPAND_JUMP 1    //digital port 1
-#define CONFIG_JUMP 2          //digital port 2
+//#define POWER_EXPAND_JUMP 1    //digital port 1
 
-#define TILE_SELECT 13         //analog port 1
-#define MOVE_SELECT 14         //analog port 2
-#define POWER_EXPAND 15        //analog port 3
+//#define TILE_SELECT 13         //analog port 1
+//#define MOVE_SELECT 14         //analog port 2
+//#define POWER_EXPAND 15        //analog port 3
 
 
 //function prototypes
