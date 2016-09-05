@@ -31,3 +31,4 @@ extern motor armRI;
 //#define TILE_SELECT 13         //analog port 1
 //#define MOVE_SELECT 14         //analog port 2
 //#define POWER_EXPAND 15        //analog port 3
+#endif
