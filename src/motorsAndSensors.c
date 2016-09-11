@@ -11,6 +11,9 @@ motor RBDrive = {3, true};
 motor LBDrive = {4, false};
 motor LFDrive = {5, false};
 
+//arm encoder
+encoder armEnc;
+
 //arm motors
 motor armLY = {6,  false};
 motor armRY = {7,  false};
@@ -23,7 +26,7 @@ motor armRI = {10, true};
 //sensors//
 ///////////
 //digital
-//sensor powerExpandJumper = {1, DIGITAL, true};
+//sensor powerExpandJumper = {1, DIGITAL, true};                       
 
 //analog
 //sensor tileSelect = {1, ANALOG, false};
