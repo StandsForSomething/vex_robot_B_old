@@ -177,7 +177,7 @@ void operatorControl()
         }
 
         //lower arm
-        if(C1_5D)
+        else if(C1_5D)
         {
             setMotor(armLY, -127);
             setMotor(armRY, -127);
@@ -186,7 +186,17 @@ void operatorControl()
             setMotor(armLI, -127);
             setMotor(armRI, -127);
         }
-	
+
+        else
+        {
+            setMotor(armLY, 0);
+            setMotor(armRY, 0);
+            setMotor(armLO, 0);
+            setMotor(armRO, 0);
+            setMotor(armLI, 0);
+            setMotor(armRI, 0);
+        }
+        
         //motors can only be updated every 20 milliseconds
         delay(20);
     }
