@@ -70,5 +70,5 @@ void initializeIO()
  */
 void initialize()
 {
-    
+    initEncoderIme(&armEnc, 0, false, TORQUE, COUNTS, 0);
 }

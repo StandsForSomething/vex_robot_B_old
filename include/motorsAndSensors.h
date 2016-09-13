@@ -9,6 +9,7 @@ extern motor RBDrive;     //port 3, reversed
 extern motor LBDrive;     //port 6, not reversed
 extern motor LFDrive;     //port 7, not reversed
 
+extern encoder armEnc;
 //arm motors
 extern motor armLY;
 extern motor armRY;
