@@ -15,8 +15,8 @@ motor LFDrive = {5, false};
 encoder armEnc;
 
 //arm motors
-motor armLY = {7,  true};
 motor armRY = {6,  false};
+motor armLY = {7,  true};
 motor armLO = {8,  false};
 motor armRO = {9,  true};
 motor armLI = {1,  false};

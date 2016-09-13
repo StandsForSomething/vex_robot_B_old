@@ -1,9 +1,6 @@
 #include "main.h"
 
-void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
-                 motorGearing motorGearing, encoderType encoderType,
-                 encoderGetType encoderGetType, float gearRatio);
-//initalizes an IME
+//initalizes an encoder as an IME
 void initEncoderIme(encoder *encoder, int port, bool reversed,
                     motorGearing motorGearing, encoderGetType encoderGetType,
                     float gearRatio)

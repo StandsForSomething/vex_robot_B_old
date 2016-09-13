@@ -15,14 +15,14 @@ typedef struct sensor
     //if sensorType is OTHER getSensor() will run whatever this points to.
     double (*sensorValue)();
 
-    //this is designed to allow inheritance and allow miniplation of the dirived
-    //structure with the parent structure has been passed as an argument.
+    //OOP, now in C! head to your local walmart now!
     struct child *child;
 }sensor;
 
 //this should be initialized with initEncoder().
 typedef struct encoder
 {
+    //this allows for iheritance
     sensor parent;
     encoderType encoderType;
 
