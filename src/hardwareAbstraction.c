@@ -1,4 +1,6 @@
 #include "main.h"
+//function prototype for function that shouldn't be used outside of this file
+double getEncoderPriv(sensor encoderParent);
 
 //initalizes an encoder as an IME
 void initEncoderIme(encoder *encoder, int port, bool reversed,
@@ -21,7 +23,7 @@ void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
     tempEncoder.parent.port = port1;
     tempEncoder.parent.sensorType = OTHER;
     tempEncoder.parent.reversed = reversed;
-    tempEncoder.parent.sensorValue = &getEncoder;
+    tempEncoder.parent.sensorValue = &getEncoderPriv;
     tempEncoder.parent.child = (struct child *)initEncoder;
 
     tempEncoder.encoderType = encoderType;
@@ -113,22 +115,30 @@ double getSensor(struct sensor sensor)
     return sensor.reversed ? -sensorValue : sensorValue;
 }
 
-//a wrapper for getEncoderMode with the encoder's default encoderGetType
-double getEncoder(sensor encoderParent)
+//a wrapper of getEncoder() but with sensor as an argument to be compatible with
+//getSensor().
+//to prevent someone trying to pass a sensor that isn't an encoder to this
+//function, this is private to this file (no function prototype in a header
+//file).
+double getEncoderPriv(sensor encoderParent)
 {
     encoder *tempEncoder = (struct encoder *)encoderParent.child;
-    return getEncoderMode(encoderParent, tempEncoder->encoderGetType);
+    return getEncoder(*tempEncoder);
+}
+
+//a wrapper for getEncoderMode with the encoder's default encoderGetType.
+double getEncoder(encoder encoder)
+{
+    return getEncoderMode(encoder, encoder.encoderGetType);
 }
 
 //returns the value of the given encoder.
-double getEncoderMode(sensor encoderParent, encoderGetType encoderGetType)
+double getEncoderMode(encoder encoder, encoderGetType encoderGetType)
 {
     double returnValue = 0;
-    encoder *tempEncoder = (struct encoder *)encoderParent.child;
-    encoder encoder = *tempEncoder;
 
-    //the functions imeGet() and imeGetVelocity() expect the memory address to
-    //an integer
+    //in addition to returnValue since certain functions used expect an int
+    //pointer as an argument.
     int sensorValue;
 
     switch(encoder.encoderType)
