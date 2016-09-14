@@ -64,8 +64,8 @@ void setOutput(struct sensor sensor, bool value);
 void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
                  motorGearing motorGearing, encoderType encoderType,
                  encoderGetType encoderGetType, float gearRatio);
-double getEncoder(sensor encoderParent);
-double getEncoderMode(sensor encoderParent, encoderGetType encoderGetType);
+double getEncoder(encoder encoderParent);
+double getEncoderMode(encoder encoderParent, encoderGetType encoderGetType);
 void initEncoderIme(encoder *encoder, int port, bool reversed,
                     motorGearing motorGearing, encoderGetType encoderGetType,
                     float gearRatio);
