@@ -57,6 +57,11 @@ typedef struct motor
     encoder *encoder;
 }motor;
 
+typedef struct motorGroup
+{
+    motor *group[10];
+}motorGroup;
+
 //function prototypes
 void setMotor(struct motor motor, int speed);
 double getSensor(struct sensor sensor);
