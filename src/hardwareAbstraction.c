@@ -2,7 +2,7 @@
 //function prototype for function that shouldn't be used outside of this file
 double getEncoderPriv(sensor encoderParent);
 
-//initalizes an IME
+//initalizes an encoder as an IME
 void initEncoderIme(encoder *encoder, int port, bool reversed,
                     motorGearing motorGearing, encoderGetType encoderGetType,
                     float gearRatio)
@@ -66,14 +66,37 @@ void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
     *initEncoder = tempEncoder;
 }
 
-
-
-void setMotor(struct motor theMotor, int speed)
+int motorGroupAdd(motor *motorToAdd, motorGroup *groupToChange)
 {
-    motorSet(theMotor.port, theMotor.reversed ? -speed : speed);
+    motorGroup tempGroup = *groupToChange;
+    for(int i = 0; i < 10; i++)
+    {
+        if(!tempGroup.group[i])
+        {
+            tempGroup.group[i] = motorToAdd;
+            
+            return 0;
+        }
+
+        return 1;
+    }
 }
 
-void writeDigital(struct sensor sensor, bool value)
+void setMotorGroup(motorGroup motorGroup, int speed)
+{
+    for(int i = 0; i < 10; i++)
+    {
+        if(motorGroup.group[i])
+            setMotor(*motorGroup.group[i], speed);
+    }
+}
+
+void setMotor(motor motor, int speed)
+{
+    motorSet(motor.port, motor.reversed ? -speed : speed);
+}
+
+void writeDigital(sensor sensor, bool value)
 {
     //if HIGH should be written as LOW and vise versa
     if(sensor.reversed)
