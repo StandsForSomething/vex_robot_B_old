@@ -63,9 +63,11 @@ typedef struct motorGroup
 }motorGroup;
 
 //function prototypes
-void setMotor(struct motor motor, int speed);
-double getSensor(struct sensor sensor);
-void setOutput(struct sensor sensor, bool value);
+int motorGroupAdd(motor *motorToAdd, motorGroup *groupToChange);
+void setMotorGroup(motorGroup motorGroup, int speed);
+void setMotor(motor motor, int speed);
+double getSensor(sensor sensor);
+void setOutput(sensor sensor, bool value);
 void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
                  motorGearing motorGearing, encoderType encoderType,
                  encoderGetType encoderGetType, float gearRatio);

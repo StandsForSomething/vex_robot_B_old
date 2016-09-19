@@ -17,6 +17,7 @@ extern motor armLO;
 extern motor armRO;
 extern motor armLI;
 extern motor armRI;
+extern motorGroup arm;
 
 //digital
 //extern sensor powerExpandJumper;    //digital port 1, input, reversed

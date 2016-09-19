@@ -68,7 +68,21 @@ void initializeIO()
  * autonomous() tasks will not start. An autonomous mode selection menu like the
  * pre_auton() in other environments can be implemented in this task if desired.
  */
+
 void initialize()
 {
+    printf("initializing motor groups\n\r");
+    motorGroupAdd(&armLY, &arm);
+    motorGroupAdd(&armRY, &arm);
+    motorGroupAdd(&armLO, &arm);
+    motorGroupAdd(&armRO, &arm);
+    motorGroupAdd(&armLI, &arm);
+    motorGroupAdd(&armRI, &arm);
+    printf("initializing IMEs\n\r");
+    printf("%d IME's initialized\n\r", imeInitializeAll());
+    printf("initializing armEnc\n\r");
     initEncoderIme(&armEnc, 0, false, TORQUE, COUNTS, 0);
+    printf("starting PID task\n\r");
+    taskCreate(pidControllerArm, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+    printf("initialize() finished\n\r");
 }

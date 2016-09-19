@@ -22,6 +22,8 @@ motor armRO = {9,  true};
 motor armLI = {1,  false};
 motor armRI = {10, true};
 
+motorGroup arm;
+
 ///////////
 //sensors//
 ///////////
