@@ -47,7 +47,7 @@
 #include "hardwareAbstraction.h"
 #include "motorsAndSensors.h"
 #include "joystick.h"
-#include "ArmPController.h"
+#include "armPController.h"
 
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus

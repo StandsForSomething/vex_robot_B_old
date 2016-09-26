@@ -157,7 +157,7 @@ double getEncoder(encoder encoder)
 
 //returns the value of the given encoder.
 double getEncoderMode(encoder encoder, encoderGetType encoderGetType)
-
+{
     double returnValue = 0;
 
     //in addition to returnValue since certain functions used expect an int

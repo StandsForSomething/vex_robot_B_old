@@ -19,6 +19,9 @@ extern motor armLI;
 extern motor armRI;
 extern motorGroup arm;
 
+extern sensor armPot;
+
+#define ARM_POT 14
 //digital
 //extern sensor powerExpandJumper;    //digital port 1, input, reversed
 

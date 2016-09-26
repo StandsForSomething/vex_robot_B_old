@@ -24,6 +24,8 @@ motor armRI = {10, true};
 
 motorGroup arm;
 
+sensor armPot = {1, ANALOG, false};
+
 ///////////
 //sensors//
 ///////////

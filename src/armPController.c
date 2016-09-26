@@ -1,6 +1,6 @@
 #include "main.h"
 
-double pid_KpArm = 0.2;
+double pid_KpArm = 0.25;
 double pidValueArm = 0;
 int liftControl = 0;
 
@@ -18,7 +18,7 @@ void pidControllerArm()
     while(true)
     {
         // Read the sensor value and scale
-        pidSensorCurrentValue = getEncoder(armEnc);
+        pidSensorCurrentValue = getSensor(armPot);
 
         if(abs(liftControl) > 1)
              pidValueArm = pidSensorCurrentValue;
@@ -37,16 +37,6 @@ void pidControllerArm()
             pidDrive = 127;
         if( pidDrive < -127)
             pidDrive = -127;
-
-        //commented out for now until I figure out the correct values
-        /*if((pidRequestedValueArm > 3384 || pidRequestedValueArm > 3384 || SensorValue[ArmLimit1]) && pidDrive > 0)
-        {
-           pidDrive = 0;
-           pidRequestedValueArm = 3384;
-        }
-
-        if((pidRequestedValueArm < 2055 || pidRequestedValueArm < 2055 || SensorValue[ArmLimit2]) && pidDrive < 0)
-        pidDrive = 0;*/
         
         setMotor(armLY, pidDrive);
         setMotor(armRY, pidDrive);

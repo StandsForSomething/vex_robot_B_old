@@ -172,6 +172,15 @@ void operatorControl()
         else if(C1_5D)
             liftControl = -127;
 
+        //raise arm slower
+        else if(C1_6U)
+            liftControl = 60;
+
+        //lower arm slower
+        else if(C1_6D)
+            liftControl = -60;
+
+        //switch to PID control
         else
             liftControl = 0;
 

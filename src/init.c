@@ -49,6 +49,7 @@
  */
 void initializeIO()
 {
+    pinMode(ARM_POT, INPUT);
     /* pinMode(POWER_EXPAND_JUMP, INPUT); */
     /* pinMode(TILE_SELECT, INPUT_ANALOG); */
     /* pinMode(MOVE_SELECT, INPUT_ANALOG); */
