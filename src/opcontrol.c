@@ -38,7 +38,6 @@
 
 //the main header file for every file in a PROS project
 #include "main.h"
-
 /*
  * Runs the user operator control code. This function will be started in its own
  * task with the default priority and stack size whenever the robot is enabled

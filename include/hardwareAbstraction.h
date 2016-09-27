@@ -15,14 +15,14 @@ typedef struct sensor
     //if sensorType is OTHER getSensor() will run whatever this points to.
     double (*sensorValue)();
 
-    //this is designed to allow inheritance and allow miniplation of the dirived
-    //structure with the parent structure has been passed as an argument.
+    //OOP, now in C! head to your local walmart now!
     struct child *child;
 }sensor;
 
 //this should be initialized with initEncoder().
 typedef struct encoder
 {
+    //this allows for iheritance
     sensor parent;
     encoderType encoderType;
 
@@ -63,9 +63,11 @@ typedef struct motorGroup
 }motorGroup;
 
 //function prototypes
-void setMotor(struct motor motor, int speed);
-double getSensor(struct sensor sensor);
-void setOutput(struct sensor sensor, bool value);
+int motorGroupAdd(motor *motorToAdd, motorGroup *groupToChange);
+void setMotorGroup(motorGroup motorGroup, int speed);
+void setMotor(motor motor, int speed);
+double getSensor(sensor sensor);
+void setOutput(sensor sensor, bool value);
 void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
                  motorGearing motorGearing, encoderType encoderType,
                  encoderGetType encoderGetType, float gearRatio);

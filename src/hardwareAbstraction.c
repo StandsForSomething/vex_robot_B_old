@@ -10,7 +10,7 @@ void initEncoderIme(encoder *encoder, int port, bool reversed,
     initEncoder(encoder, port, 0, reversed, motorGearing, IME,
                             encoderGetType, gearRatio);
 }
-    
+
 //initializes an encoder
 void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
                  motorGearing motorGearing, encoderType encoderType,
@@ -78,8 +78,9 @@ int motorGroupAdd(motor *motorToAdd, motorGroup *groupToChange)
             return 0;
         }
 
-        return 1;
     }
+
+    return 1;
 }
 
 void setMotorGroup(motorGroup motorGroup, int speed)
@@ -109,7 +110,7 @@ void writeDigital(sensor sensor, bool value)
         digitalWrite(sensor.port, value);
 }
 
-double getSensor(struct sensor sensor)
+double getSensor(sensor sensor)
 {
     double sensorValue;
 
@@ -145,7 +146,7 @@ double getSensor(struct sensor sensor)
 //file).
 double getEncoderPriv(sensor encoderParent)
 {
-    encoder *tempEncoder = (struct encoder *)encoderParent.child;
+    encoder *tempEncoder = (encoder *)encoderParent.child;
     return getEncoder(*tempEncoder);
 }
 
@@ -162,7 +163,7 @@ double getEncoderMode(encoder encoder, encoderGetType encoderGetType)
 
     //in addition to returnValue since certain functions used expect an int
     //pointer as an argument.
-    int sensorValue;
+    int sensorValue = 0;
 
     switch(encoder.encoderType)
     {
