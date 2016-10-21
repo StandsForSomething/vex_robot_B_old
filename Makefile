@@ -62,7 +62,7 @@ $(ASMOBJ): $(BINDIR)/%.o: %.$(ASMEXT) $(HEADERS)
 # Object management
 $(COBJ): $(BINDIR)/%.o: %.$(CEXT) $(HEADERS)
 	@echo CC $(INCLUDE) $<
-	@$(CC) $(INCLUDE) $(CFLAGS) -o $@ $<
+	$(CC) $(INCLUDE) $(CFLAGS) -o $@ $<
 
 $(CPPOBJ): $(BINDIR)/%.o: %.$(CPPEXT) $(HEADERS)
 	@echo CPC $(INCLUDE) $<
