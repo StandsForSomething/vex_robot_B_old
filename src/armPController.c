@@ -22,10 +22,10 @@ void pidControllerArm()
 
         if(abs(liftControl) > 1)
              pidValueArm = pidSensorCurrentValue;
-        
+
         // calculate error
         pidError =  pidValueArm - pidSensorCurrentValue;
-        
+
         // calculate drive
         if(abs(liftControl) > 1)
              pidDrive = liftControl;
@@ -37,13 +37,11 @@ void pidControllerArm()
             pidDrive = 127;
         if( pidDrive < -127)
             pidDrive = -127;
-        
+
         setMotor(armLY, pidDrive);
         setMotor(armRY, pidDrive);
-        setMotor(armLO, pidDrive);
-        setMotor(armRO, pidDrive);
-        setMotor(armLI, pidDrive);
-        setMotor(armRI, pidDrive);
+        setMotor(armL, pidDrive);
+        setMotor(armR, pidDrive);
         // Don't hog cpu
         delay(20);
     }

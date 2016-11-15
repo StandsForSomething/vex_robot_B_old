@@ -15,12 +15,10 @@ motor LFDrive = {5, false};
 encoder armEnc;
 
 //arm motors
-motor armRY = {6,  false};
-motor armLY = {7,  true};
-motor armLO = {8,  false};
-motor armRO = {9,  true};
-motor armLI = {1,  false};
-motor armRI = {10, true};
+motor armRY = {6, true};
+motor armLY = {7, false};
+motor armL  = {8, false};
+motor armR  = {9, true};
 
 motorGroup arm;
 
@@ -30,7 +28,7 @@ sensor armPot = {1, ANALOG, false};
 //sensors//
 ///////////
 //digital
-//sensor powerExpandJumper = {1, DIGITAL, true};                       
+//sensor powerExpandJumper = {1, DIGITAL, true};
 
 //analog
 //sensor tileSelect = {1, ANALOG, false};

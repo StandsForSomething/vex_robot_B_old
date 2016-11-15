@@ -13,10 +13,8 @@ extern encoder armEnc;
 //arm motors
 extern motor armLY;
 extern motor armRY;
-extern motor armLO;
-extern motor armRO;
-extern motor armLI;
-extern motor armRI;
+extern motor armL;
+extern motor armR;
 extern motorGroup arm;
 
 extern sensor armPot;

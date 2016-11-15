@@ -121,7 +121,7 @@ void operatorControl()
                 setMotor(RBDrive,  C1LY + C1LX - C1RX);	   //right back wheel
                 setMotor(LBDrive,  C1LY - C1LX + C1RX);	   //left back wheel
                 break;
-				
+
             case LEFT: // Second Mode (8L)
                 //pressing the left joystick forward
                 //will move the robot to the left

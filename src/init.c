@@ -75,15 +75,14 @@ void initialize()
     printf("initializing motor groups\n\r");
     motorGroupAdd(&armLY, &arm);
     motorGroupAdd(&armRY, &arm);
-    motorGroupAdd(&armLO, &arm);
-    motorGroupAdd(&armRO, &arm);
-    motorGroupAdd(&armLI, &arm);
-    motorGroupAdd(&armRI, &arm);
+    motorGroupAdd(&armL, &arm);
+    motorGroupAdd(&armR, &arm);
     printf("initializing IMEs\n\r");
     printf("%d IME's initialized\n\r", imeInitializeAll());
     printf("initializing armEnc\n\r");
     initEncoderIme(&armEnc, 0, false, TORQUE, COUNTS, 0);
     printf("starting PID task\n\r");
-    taskCreate(pidControllerArm, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+    taskCreate(pidControllerArm, TASK_DEFAULT_STACK_SIZE, NULL,
+               TASK_PRIORITY_DEFAULT);
     printf("initialize() finished\n\r");
 }
