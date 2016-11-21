@@ -78,6 +78,7 @@ void operatorControl()
     //control loop
     while (1)
     {
+
         /////////
         //Drive//
         //////////////////////////////////////////////////////////////////////
@@ -146,7 +147,7 @@ void operatorControl()
                 setMotor(LFDrive, -C1LY - C1LX + C1RX);	   //left front wheel
                 setMotor(RFDrive, -C1LY + C1LX - C1RX);    //right front wheel
                 setMotor(RBDrive, -C1LY - C1LX - C1RX);	   //right back wheel
-                setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel   
+                setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel
                 break;
             }
         }
@@ -164,21 +165,17 @@ void operatorControl()
         //arm code//
         ////////////
 
-        //raise arm
-        if(C1_5U)
+        //raise arm if it's not already up
+        if(C1_5U && getSensor(armPot) <= ARM_FULL_HEIGHT)
             liftControl = 127;
 
-        //lower arm
-        else if(C1_5D)
+        //lower arm if it can go any lower without launching
+        else if(C1_5D && getSensor(armPot) >= ARM_MIN_HEIGHT)
             liftControl = -127;
 
-        //raise arm slower
+        //launch the arm
         else if(C1_6U)
-            liftControl = 60;
-
-        //lower arm slower
-        else if(C1_6D)
-            liftControl = -60;
+            pidValueArm = ARM_LAUNCH_HEIGHT;
 
         //switch to PID control
         else

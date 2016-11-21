@@ -14,7 +14,7 @@ int  pidDrive = 0;
 
 void pidControllerArm()
 {
-
+    pidValueArm = getSensor(armPot);
     while(true)
     {
         // Read the sensor value and scale
