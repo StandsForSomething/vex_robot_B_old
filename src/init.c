@@ -49,7 +49,6 @@
  */
 void initializeIO()
 {
-    pinMode(ARM_POT, INPUT);
     /* pinMode(POWER_EXPAND_JUMP, INPUT); */
     /* pinMode(TILE_SELECT, INPUT_ANALOG); */
     /* pinMode(MOVE_SELECT, INPUT_ANALOG); */
@@ -72,17 +71,5 @@ void initializeIO()
 
 void initialize()
 {
-    printf("initializing motor groups\n\r");
-    motorGroupAdd(&armLY, &arm);
-    motorGroupAdd(&armRY, &arm);
-    motorGroupAdd(&armL, &arm);
-    motorGroupAdd(&armR, &arm);
-    printf("initializing IMEs\n\r");
-    printf("%d IME's initialized\n\r", imeInitializeAll());
-    printf("initializing armEnc\n\r");
-    initEncoderIme(&armEnc, 0, false, TORQUE, COUNTS, 0);
-    printf("starting PID task\n\r");
-    taskCreate(pidControllerArm, TASK_DEFAULT_STACK_SIZE, NULL,
-               TASK_PRIORITY_DEFAULT);
-    printf("initialize() finished\n\r");
+    
 }

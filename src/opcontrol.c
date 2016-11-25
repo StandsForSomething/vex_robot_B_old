@@ -106,7 +106,7 @@ void operatorControl()
 
         //only FRONT is currently working corectly, this
         //makes it impossible to use any other mode
-        //DriverMode = FRONT;
+        DriverMode = FRONT;
 
         //deadzones for each of the joysticks to prevent motor whine
         if ((abs(C1LY) > 20 || abs(C1LX) > 20 || abs(C1RX) > 20))
@@ -117,37 +117,40 @@ void operatorControl()
             case FRONT: //First Mode (8U)
                 //pressing the left joystick forward
                 //will move the robot forward
-                setMotor(LFDrive,  C1LY + C1LX + C1RX);	   //left front wheel
-                setMotor(RFDrive,  C1LY - C1LX - C1RX);    //right front wheel
-                setMotor(RBDrive,  C1LY + C1LX - C1RX);	   //right back wheel
-                setMotor(LBDrive,  C1LY - C1LX + C1RX);	   //left back wheel
+                setMotor(LFDriveI,  C1LY + C1LX + C1RX);     //left front wheel
+                setMotor(LFDriveO,  C1LY + C1LX + C1RX);     //left front wheel
+                setMotor(RFDriveI,  C1LY - C1LX - C1RX);     //right front wheel
+                setMotor(RFDriveO,  C1LY + C1LX + C1RX);     //left front wheel
+                setMotor(RBDriveI,  C1LY + C1LX - C1RX);     //right back wheel
+                setMotor(RBDriveO,  C1LY + C1LX + C1RX);     //left front wheel
+                setMotor(LBDriveI,  C1LY - C1LX + C1RX);     //left back wheel
                 break;
 
             case LEFT: // Second Mode (8L)
                 //pressing the left joystick forward
                 //will move the robot to the left
-                setMotor(LFDrive, -C1LY + C1LX + C1RX);    //left front wheel
-                setMotor(RFDrive,  C1LY + C1LX - C1RX);    //right front wheel
-                setMotor(RBDrive, -C1LY + C1LX - C1RX);    //right back wheel
-                setMotor(LBDrive,  C1LY + C1LX + C1RX);    //left back wheel
+                // setMotor(LFDrive, -C1LY + C1LX + C1RX);    //left front wheel
+                //setMotor(RFDrive,  C1LY + C1LX - C1RX);    //right front wheel
+                //setMotor(RBDrive, -C1LY + C1LX - C1RX);    //right back wheel
+                //setMotor(LBDrive,  C1LY + C1LX + C1RX);    //left back wheel
                 break;
 
             case RIGHT: // Third Mode (8R)
                 //pressing the left joystick forward
                 //will move the robot to the right
-                setMotor(LFDrive,  C1LY - C1LX + C1RX);    //left front wheel
-                setMotor(RFDrive, -C1LY - C1LX - C1RX);    //right front wheel
-                setMotor(RBDrive,  C1LY - C1LX - C1RX);    //right back wheel
-                setMotor(LBDrive, -C1LY - C1LX + C1RX);    //left back wheel
+                //setMotor(LFDrive,  C1LY - C1LX + C1RX);    //left front wheel
+                //setMotor(RFDrive, -C1LY - C1LX - C1RX);    //right front wheel
+                //setMotor(RBDrive,  C1LY - C1LX - C1RX);    //right back wheel
+                //setMotor(LBDrive, -C1LY - C1LX + C1RX);    //left back wheel
                 break;
 
             case BACK: // Fourth Mode (8D)
                 //pressing the left joystick forward
                 //will move the robot backward
-                setMotor(LFDrive, -C1LY - C1LX + C1RX);	   //left front wheel
-                setMotor(RFDrive, -C1LY + C1LX - C1RX);    //right front wheel
-                setMotor(RBDrive, -C1LY - C1LX - C1RX);	   //right back wheel
-                setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel
+                //setMotor(LFDrive, -C1LY - C1LX + C1RX);	   //left front wheel
+                //setMotor(RFDrive, -C1LY + C1LX - C1RX);    //right front wheel
+                //setMotor(RBDrive, -C1LY - C1LX - C1RX);	   //right back wheel
+                //setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel
                 break;
             }
         }
@@ -155,32 +158,15 @@ void operatorControl()
         //if joysticks are within deadzones set all drive motors to 0
         else
         {
-            setMotor(LFDrive, 0);
-            setMotor(RFDrive, 0);
-            setMotor(RBDrive, 0);
-            setMotor(LBDrive, 0);
+            setMotor(LFDriveI, 0);
+            setMotor(LFDriveO, 0);
+            setMotor(RFDriveI, 0);
+            setMotor(RFDriveO, 0);
+            setMotor(LBDriveI, 0);
+            setMotor(LBDriveO, 0);
+            setMotor(RBDriveI, 0);
+            setMotor(RBDriveO, 0);
         }
-
-        ////////////
-        //arm code//
-        ////////////
-
-        //raise arm if it's not already up
-        if(C1_5U && getSensor(armPot) <= ARM_FULL_HEIGHT)
-            liftControl = 127;
-
-        //lower arm if it can go any lower without launching
-        else if(C1_5D && getSensor(armPot) >= ARM_MIN_HEIGHT)
-            liftControl = -127;
-
-        //launch the arm
-        else if(C1_6U)
-            pidValueArm = ARM_LAUNCH_HEIGHT;
-
-        //switch to PID control
-        else
-            liftControl = 0;
-
         //motors can only be updated every 20 milliseconds
         delay(20);
     }

@@ -2,24 +2,17 @@
 #define MOTORS_H_
 
 //right motors
-extern motor RFDrive;     //port 2, reversed
-extern motor RBDrive;     //port 3, reversed
+extern motor RFDriveI;     //port 2, reversed
+extern motor RFDriveO;     //port 3, reversed
+extern motor RBDriveI;     //port 2, reversed
+extern motor RBDriveO;     //port 3, reversed
 
 //left motors
-extern motor LBDrive;     //port 6, not reversed
-extern motor LFDrive;     //port 7, not reversed
+extern motor LFDriveI;     //port 6, not reversed
+extern motor LFDriveO;     //port 7, not reversed
+extern motor LBDriveI;     //port 2, reversed
+extern motor LBDriveO;     //port 3, reversed
 
-extern encoder armEnc;
-//arm motors
-extern motor armLY;
-extern motor armRY;
-extern motor armL;
-extern motor armR;
-extern motorGroup arm;
-
-extern sensor armPot;
-
-#define ARM_POT 14
 //digital
 //extern sensor powerExpandJumper;    //digital port 1, input, reversed
 

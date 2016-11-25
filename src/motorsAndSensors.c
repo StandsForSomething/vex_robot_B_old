@@ -4,25 +4,16 @@
 //////////
 
 //right motors
-motor RFDrive = {2, true};
-motor RBDrive = {3, true};
+motor RFDriveI = {2, true};
+motor RFDriveO = {3, false};
+motor RBDriveI = {4, true};
+motor RBDriveO = {5, false};
 
 //left motors
-motor LBDrive = {4, false};
-motor LFDrive = {5, false};
-
-//arm encoder
-encoder armEnc;
-
-//arm motors
-motor armRY = {6, true};
-motor armLY = {7, false};
-motor armL  = {8, false};
-motor armR  = {9, true};
-
-motorGroup arm;
-
-sensor armPot = {1, ANALOG, false};
+motor LFDriveI = {6, false};
+motor LFDriveO = {7, true};
+motor LBDriveI = {8, false};
+motor LBDriveO = {9, true};
 
 ///////////
 //sensors//

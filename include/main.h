@@ -3,7 +3,7 @@
  * 
  * Any experienced C or C++ programmer knows the importance of header files. For those who
  * do not, a header file allows multiple files to reference functions in other files without
- * necessarily having to see the code (and therefore causing a multiple definition). To make
+b * necessarily having to see the code (and therefore causing a multiple definition). To make
  * a function in "opcontrol.c", "auto.c", "main.c", or any other C file visible to the core
  * implementation files, prototype it here.
  *
@@ -47,7 +47,6 @@
 #include "hardwareAbstraction.h"
 #include "motorsAndSensors.h"
 #include "joystick.h"
-#include "armPController.h"
 
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
