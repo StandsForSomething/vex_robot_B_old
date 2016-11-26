@@ -64,7 +64,7 @@
 void operatorControl()
 {
     //used in a switch for different control modes.
-    typedef enum DriveMode {FRONT, LEFT, RIGHT, BACK}DriveMode;
+    typedef enum DriveMode {FRONT, BACK}DriveMode;
     DriveMode DriverMode = FRONT;
 
     //in the case that the power expander isn't plugged in don't continue until
@@ -92,24 +92,13 @@ void operatorControl()
         if (C1_8U)
             DriverMode = FRONT;        //Change mode to FRONT
 
-        //if button 8L is pressed and has been debounced
-        if (C1_8L)
-            DriverMode = LEFT;        //change mode to LEFT
-
-        //if button 8R is pressed and has been debounced
-        if (C1_8R)
-            DriverMode = RIGHT;        //change mode to RIGHT
 
         //if button 8D is pressed and has been debounced
         if(C1_8D)
             DriverMode = BACK;         //Change mode to BACK
 
-        //only FRONT is currently working corectly, this
-        //makes it impossible to use any other mode
-        DriverMode = FRONT;
-
         //deadzones for each of the joysticks to prevent motor whine
-        if ((abs(C1LY) > 20 || abs(C1LX) > 20 || abs(C1RX) > 20))
+        if ((abs(C1LY) > 20 || abs(C1RY) > 20))
         {
             //switch to change driver configuration
             switch (DriverMode)
@@ -117,41 +106,27 @@ void operatorControl()
             case FRONT: //First Mode (8U)
                 //pressing the left joystick forward
                 //will move the robot forward
-                setMotor(LFDriveI,  C1LY + C1LX + C1RX);     //left front wheel
-                setMotor(LFDriveO,  C1LY + C1LX + C1RX);     //left front wheel
-                setMotor(RFDriveI,  C1LY - C1LX - C1RX);     //right front wheel
-                setMotor(RFDriveO,  C1LY - C1LX - C1RX);     //left front wheel
-                setMotor(RBDriveI,  C1LY + C1LX - C1RX);     //right back wheel
-                setMotor(RBDriveO,  C1LY + C1LX - C1RX);     //left front wheel
-                setMotor(LBDriveI,  C1LY - C1LX + C1RX);     //left back wheel
-                setMotor(LBDriveO,  C1LY - C1LX + C1RX);     //left back wheel
-                break;
-
-            case LEFT: // Second Mode (8L)
-                //pressing the left joystick forward
-                //will move the robot to the left
-                // setMotor(LFDrive, -C1LY + C1LX + C1RX);    //left front wheel
-                //setMotor(RFDrive,  C1LY + C1LX - C1RX);    //right front wheel
-                //setMotor(RBDrive, -C1LY + C1LX - C1RX);    //right back wheel
-                //setMotor(LBDrive,  C1LY + C1LX + C1RX);    //left back wheel
-                break;
-
-            case RIGHT: // Third Mode (8R)
-                //pressing the left joystick forward
-                //will move the robot to the right
-                //setMotor(LFDrive,  C1LY - C1LX + C1RX);    //left front wheel
-                //setMotor(RFDrive, -C1LY - C1LX - C1RX);    //right front wheel
-                //setMotor(RBDrive,  C1LY - C1LX - C1RX);    //right back wheel
-                //setMotor(LBDrive, -C1LY - C1LX + C1RX);    //left back wheel
+                setMotor(LFDriveI,  C1LY);     //left front wheel
+                setMotor(LFDriveO,  C1LY);     //left front wheel
+                setMotor(RFDriveI,  C1RY);     //right front wheel
+                setMotor(RFDriveO,  C1RY);     //left front wheel
+                setMotor(RBDriveI,  C1RY);     //right back wheel
+                setMotor(RBDriveO,  C1RY);     //left front wheel
+                setMotor(LBDriveI,  C1LY);     //left back wheel
+                setMotor(LBDriveO,  C1LY);     //left back wheel
                 break;
 
             case BACK: // Fourth Mode (8D)
                 //pressing the left joystick forward
-                //will move the robot backward
-                //setMotor(LFDrive, -C1LY - C1LX + C1RX);	   //left front wheel
-                //setMotor(RFDrive, -C1LY + C1LX - C1RX);    //right front wheel
-                //setMotor(RBDrive, -C1LY - C1LX - C1RX);	   //right back wheel
-                //setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel
+                //will move the robot forward
+                setMotor(LFDriveI, -C1LY);     //left front wheel
+                setMotor(LFDriveO, -C1LY);     //left front wheel
+                setMotor(RFDriveI, -C1RY);     //right front wheel
+                setMotor(RFDriveO, -C1RY);     //left front wheel
+                setMotor(RBDriveI, -C1RY);     //right back wheel
+                setMotor(RBDriveO, -C1RY);     //left front wheel
+                setMotor(LBDriveI, -C1LY);     //left back wheel
+                setMotor(LBDriveO, -C1LY);     //left back wheel
                 break;
             }
         }
