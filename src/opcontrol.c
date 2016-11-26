@@ -120,10 +120,11 @@ void operatorControl()
                 setMotor(LFDriveI,  C1LY + C1LX + C1RX);     //left front wheel
                 setMotor(LFDriveO,  C1LY + C1LX + C1RX);     //left front wheel
                 setMotor(RFDriveI,  C1LY - C1LX - C1RX);     //right front wheel
-                setMotor(RFDriveO,  C1LY + C1LX + C1RX);     //left front wheel
+                setMotor(RFDriveO,  C1LY - C1LX - C1RX);     //left front wheel
                 setMotor(RBDriveI,  C1LY + C1LX - C1RX);     //right back wheel
-                setMotor(RBDriveO,  C1LY + C1LX + C1RX);     //left front wheel
+                setMotor(RBDriveO,  C1LY + C1LX - C1RX);     //left front wheel
                 setMotor(LBDriveI,  C1LY - C1LX + C1RX);     //left back wheel
+                setMotor(LBDriveO,  C1LY - C1LX + C1RX);     //left back wheel
                 break;
 
             case LEFT: // Second Mode (8L)
