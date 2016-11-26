@@ -14,3 +14,6 @@
 
 #megasync .debris folder
 .debris/
+
+#enhanced hardware abstraction library
+EHA-Lib/
