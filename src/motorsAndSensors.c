@@ -5,15 +5,15 @@
 
 //right motors
 motor RFDriveI = {2, true};
-motor RFDriveO = {3, false};
+motor RFDriveO = {3, true};
 motor RBDriveI = {4, true};
-motor RBDriveO = {5, false};
+motor RBDriveO = {5, true};
 
 //left motors
 motor LFDriveI = {6, false};
-motor LFDriveO = {7, true};
+motor LFDriveO = {7, false};
 motor LBDriveI = {8, false};
-motor LBDriveO = {9, true};
+motor LBDriveO = {9, false};
 
 ///////////
 //sensors//
