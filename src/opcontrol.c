@@ -63,17 +63,18 @@
 
 void operatorControl()
 {
+    printf("opcontrol started\n\r");
     //used in a switch for different control modes.
     typedef enum DriveMode {FRONT, BACK}DriveMode;
     DriveMode DriverMode = FRONT;
-
+    bool tankControl = getSensor(driveControlJumper);
+    
     //in the case that the power expander isn't plugged in don't continue until
     //it's plugged in or overriden by placeing a jumper in digital pin 2.
     //this makes sure the robot can't move unless the issue is fixed becuase once
     //the robot moves it can't legally be fixed.  The option of using a jumper to
     //continue is incase the issue can't be fixed.
     //while(getSensor(powerExpand) < 1000 && !getSensor(powerExpandJumper)){delay(1)}
-
 
     //control loop
     while (1)
@@ -103,30 +104,57 @@ void operatorControl()
             //switch to change driver configuration
             switch (DriverMode)
             {
-            case FRONT: //First Mode (8U)
-                //pressing the left joystick forward
-                //will move the robot forward
-                setMotor(LFDriveI,  C1LY);     //left front wheel
-                setMotor(LFDriveO,  C1LY);     //left front wheel
-                setMotor(RFDriveI,  C1RY);     //right front wheel
-                setMotor(RFDriveO,  C1RY);     //left front wheel
-                setMotor(RBDriveI,  C1RY);     //right back wheel
-                setMotor(RBDriveO,  C1RY);     //left front wheel
-                setMotor(LBDriveI,  C1LY);     //left back wheel
-                setMotor(LBDriveO,  C1LY);     //left back wheel
+            case FRONT:
+                if(tankControl)
+                {
+                    setMotor(LFDriveI,  C1LY);     //left front wheel
+                    setMotor(LFDriveO,  C1LY);     //left front wheel
+                    setMotor(RFDriveI,  C1RY);     //right front wheel
+                    setMotor(RFDriveO,  C1RY);     //left front wheel
+                    setMotor(RBDriveI,  C1RY);     //right back wheel
+                    setMotor(RBDriveO,  C1RY);     //left front wheel
+                    setMotor(LBDriveI,  C1LY);     //left back wheel
+                    setMotor(LBDriveO,  C1LY);     //left back wheel
+                }
+
+                else
+                {
+                    setMotor(LFDriveI,  C1LY + C1RX);     //left front wheel
+                    setMotor(LFDriveO,  C1LY + C1RX);     //left front wheel
+                    setMotor(RFDriveI,  C1LY - C1RX);     //right front wheel
+                    setMotor(RFDriveO,  C1LY - C1RX);     //left front wheel
+                    setMotor(RBDriveI,  C1LY - C1RX);     //right back wheel
+                    setMotor(RBDriveO,  C1LY - C1RX);     //left front wheel
+                    setMotor(LBDriveI,  C1LY + C1RX);     //left back wheel
+                    setMotor(LBDriveO,  C1LY + C1RX);     //left back wheel
+                }
+
                 break;
 
-            case BACK: // Fourth Mode (8D)
-                //pressing the left joystick forward
-                //will move the robot forward
-                setMotor(LFDriveI, -C1LY);     //left front wheel
-                setMotor(LFDriveO, -C1LY);     //left front wheel
-                setMotor(RFDriveI, -C1RY);     //right front wheel
-                setMotor(RFDriveO, -C1RY);     //left front wheel
-                setMotor(RBDriveI, -C1RY);     //right back wheel
-                setMotor(RBDriveO, -C1RY);     //left front wheel
-                setMotor(LBDriveI, -C1LY);     //left back wheel
-                setMotor(LBDriveO, -C1LY);     //left back wheel
+            case BACK:
+                if(tankControl)
+                {
+                    setMotor(LFDriveI, -C1RY);     //left front wheel
+                    setMotor(LFDriveO, -C1RY);     //left front wheel
+                    setMotor(RFDriveI, -C1LY);     //right front wheel
+                    setMotor(RFDriveO, -C1LY);     //left front wheel
+                    setMotor(RBDriveI, -C1LY);     //right back wheel
+                    setMotor(RBDriveO, -C1LY);     //left front wheel
+                    setMotor(LBDriveI, -C1RY);     //left back wheel
+                    setMotor(LBDriveO, -C1RY);     //left back wheel
+                }
+
+                else
+                {
+                    setMotor(LFDriveI, -C1LY + C1RX);     //left front wheel
+                    setMotor(LFDriveO, -C1LY + C1RX);     //left front wheel
+                    setMotor(RFDriveI, -C1LY - C1RX);     //right front wheel
+                    setMotor(RFDriveO, -C1LY - C1RX);     //left front wheel
+                    setMotor(RBDriveI, -C1LY - C1RX);     //right back wheel
+                    setMotor(RBDriveO, -C1LY - C1RX);     //left front wheel
+                    setMotor(LBDriveI, -C1LY + C1RX);     //left back wheel
+                    setMotor(LBDriveO, -C1LY + C1RX);     //left back wheel
+                }
                 break;
             }
         }
