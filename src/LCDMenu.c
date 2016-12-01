@@ -53,7 +53,8 @@ void LCDMenu(sensor selectionPot)
 
 void newItem(char* itemText, void (*itemFunction)())
 {
-    LCDMenuItems = realloc(LCDMenuItems, numOfItems * sizeof *LCDMenuItems);
+    LCDMenuItems = realloc(LCDMenuItems, numOfItems + 1 * sizeof *LCDMenuItems);
     LCDMenuItems[numOfItems-1].LCDText = itemText;
     LCDMenuItems[numOfItems-1].function = itemFunction;
+    potSelectionSize = 4095 / numOfItems;
 }
