@@ -50,10 +50,10 @@
 void initializeIO()
 {
     pinMode(DRIVE_CONTROL_JUMP, INPUT);
-    /* pinMode(POWER_EXPAND_JUMP, INPUT); */
+    pinMode(POWER_EXPAND_JUMP, INPUT);
+    pinMode(POWER_EXPAND, INPUT_ANALOG);
     /* pinMode(TILE_SELECT, INPUT_ANALOG); */
     /* pinMode(MOVE_SELECT, INPUT_ANALOG); */
-    /* pinMode(POWER_EXPAND, INPUT_ANALOG); */
 }
 
 /*

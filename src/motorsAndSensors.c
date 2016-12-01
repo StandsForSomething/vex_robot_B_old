@@ -20,9 +20,9 @@ motor LBDriveO = {9, true};
 ///////////
 //digital
 sensor driveControlJumper = {1, DIGITAL, false};
-//sensor powerExpandJumper = {2, DIGITAL, true};
+sensor powerExpandJumper = {12, DIGITAL, true};
 
 //analog
-//sensor tileSelect = {1, ANALOG, false};
-//sensor movementSelect = {2, ANALOG, false};
-//sensor powerExpand = {3, ANALOG, false};
+sensor powerExpand = {1, ANALOG, false};
+//sensor tileSelect = {2, ANALOG, false};
+//sensor movementSelect = {3, ANALOG, false};

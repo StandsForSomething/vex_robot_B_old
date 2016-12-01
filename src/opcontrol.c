@@ -68,13 +68,13 @@ void operatorControl()
     typedef enum DriveMode {FRONT, BACK}DriveMode;
     DriveMode DriverMode = FRONT;
     bool tankControl = getSensor(driveControlJumper);
-    
+
     //in the case that the power expander isn't plugged in don't continue until
     //it's plugged in or overriden by placeing a jumper in digital pin 2.
     //this makes sure the robot can't move unless the issue is fixed becuase once
     //the robot moves it can't legally be fixed.  The option of using a jumper to
     //continue is incase the issue can't be fixed.
-    //while(getSensor(powerExpand) < 1000 && !getSensor(powerExpandJumper)){delay(1)}
+    while(getSensor(powerExpand) < 1000 && getSensor(powerExpandJumper)){delay(20);}
 
     //control loop
     while (1)

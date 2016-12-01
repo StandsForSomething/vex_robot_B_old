@@ -15,18 +15,18 @@ extern motor LBDriveO;     //port 3, reversed
 
 //digital
 extern sensor driveControlJumper;
-//extern sensor powerExpandJumper;    //digital port 2, input, reversed
+extern sensor powerExpandJumper;    //digital port 2, input, reversed
 
 //analog
-//extern sensor tileSelect;        //analog port 1, not reversed
-//extern sensor movementSelect;    //analog port 2, not reversed
-//extern sensor powerExpand;     //analog port 3, not reversed
+extern sensor powerExpand;         //analog port 1, not reversed
+//extern sensor tileSelect;        //analog port 2, not reversed
+//extern sensor movementSelect;    //analog port 3, not reversed
 
 //definition for cortex pins
 #define DRIVE_CONTROL_JUMP 1
-//#define POWER_EXPAND_JUMP 2    //digital port 2
+#define POWER_EXPAND_JUMP 12       //digital port 2
 
-//#define TILE_SELECT 13         //analog port 1
-//#define MOVE_SELECT 14         //analog port 2
-//#define POWER_EXPAND 15        //analog port 3
+#define POWER_EXPAND 13            //analog port 1
+//#define TILE_SELECT 14           //analog port 2
+//#define MOVE_SELECT 15           //analog port 3
 #endif
