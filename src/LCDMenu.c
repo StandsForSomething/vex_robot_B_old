@@ -1,22 +1,28 @@
 #include "main.h"
 
-LCDItem LCDMenuItem[NUM_OF_ITEMS];
+size_t numOfItems = 0;
+LCDItem *LCDMenuItems = NULL;
 int currentSelection;
 
 //divides all possible potentiometer values between all the items so that all
 //items have an equal size range of values where they're selected.
-int potSelectionSize = 4095 / NUM_OF_ITEMS;
+int potSelectionSize;
 int selectionRangeUpper;
 int selectionRangeLower;
 
 void LCDMenu(sensor selectionPot)
 {
+    if(!numOfItems)
+    {
+        return;
+    }
+
     while(true)
     {
         selectionRangeUpper = potSelectionSize;
         selectionRangeLower = 0;
         //loop through all the items to decide what should be displayed
-        for(int i = 0; i < NUM_OF_ITEMS; i++)
+        for(int i = 0; i < numOfItems; i++)
         {
             //if the potentiometer is within the selection range of item i
             if(getSensor(selectionPot) >= selectionRangeLower &&
@@ -26,14 +32,14 @@ void LCDMenu(sensor selectionPot)
                 currentSelection = i;
 
                 //display the selection on line 1 of the LCD pluged int uart1
-                lcdSetText(uart1, 1, LCDMenuItem[i].LCDText);
+                lcdSetText(uart1, 1, LCDMenuItems[i].LCDText);
 
                 //if there is more than one item and the last item isn't the
                 //current selection
-                if(NUM_OF_ITEMS > 1 && i != NUM_OF_ITEMS-1)
+                if(numOfItems > 1 && i != numOfItems-1)
                 {
                     //display the next selection
-                    lcdSetText(uart1, 2, LCDMenuItem[i+1].LCDText);
+                    lcdSetText(uart1, 2, LCDMenuItems[i+1].LCDText);
                 }
             }
 
@@ -43,4 +49,11 @@ void LCDMenu(sensor selectionPot)
         }
         delay(20);
     }
+}
+
+void newItem(char* itemText, void (*itemFunction)())
+{
+    LCDMenuItems = realloc(LCDMenuItems, numOfItems * sizeof *LCDMenuItems);
+    LCDMenuItems[numOfItems-1].LCDText = itemText;
+    LCDMenuItems[numOfItems-1].function = itemFunction;
 }
