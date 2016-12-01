@@ -9,8 +9,9 @@ int currentSelection;
 int potSelectionSize;
 int selectionRangeUpper;
 int selectionRangeLower;
+sensor selectionPot;
 
-void LCDMenu(sensor selectionPot)
+void LCDMenuTask(void *ignore)
 {
     if(!numOfItems)
     {
@@ -47,13 +48,15 @@ void LCDMenu(sensor selectionPot)
             selectionRangeLower = selectionRangeUpper;
             selectionRangeUpper += potSelectionSize;
         }
+        printf("%d\n\r",currentSelection);
         delay(20);
     }
 }
 
 void newItem(char* itemText, void (*itemFunction)())
 {
-    LCDMenuItems = realloc(LCDMenuItems, numOfItems + 1 * sizeof *LCDMenuItems);
+    numOfItems++;
+    LCDMenuItems = realloc(LCDMenuItems, numOfItems * sizeof *LCDMenuItems);
     LCDMenuItems[numOfItems-1].LCDText = itemText;
     LCDMenuItems[numOfItems-1].function = itemFunction;
     potSelectionSize = 4095 / numOfItems;

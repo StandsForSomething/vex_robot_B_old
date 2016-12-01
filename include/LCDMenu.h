@@ -9,5 +9,8 @@ typedef struct LCDItem
 
 extern LCDItem *LCDMenuItems;
 extern int currentSelection;
+extern sensor selectionPot;
 
+void LCDMenuTask(void *ignore);
+void newItem(char* itemText, void (*itemFunction)());
 #endif
