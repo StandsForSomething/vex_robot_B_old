@@ -11,8 +11,5 @@ typedef struct LCDItem
 
 extern LCDItem LCDMenuItem[NUM_OF_ITEMS];
 extern int currentSelection;
-extern int potSelectionSize;
-extern int selectionRangeLower;
-extern int selectionRangeUpper;
 
 #endif
