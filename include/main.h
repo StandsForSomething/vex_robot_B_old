@@ -44,9 +44,10 @@ b * necessarily having to see the code (and therefore causing a multiple definit
 #define MAIN_H_
 
 #include <API.h>
-#include "../EHA-Lib/include/hardwareAbstraction.h"
+#include "hardwareAbstraction.h"
+#include "joystick.h"
 #include "motorsAndSensors.h"
-#include "../EHA-Lib/include/joystick.h"
+#include "LCDMenu.h"
 
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
@@ -97,7 +98,7 @@ void initializeIO();
  */
 void initialize();
 /**
- * Runs the user operator control code. This function will be started in its own task with the
+ * Runs the user operator control hcode. This function will be started in its own task with the
  * default priority and stack size whenever the robot is enabled via the Field Management System
  * or the VEX Competition Switch in the operator control mode. If the robot is disabled or
  * communications is lost, the operator control task will be stopped by the kernel. Re-enabling

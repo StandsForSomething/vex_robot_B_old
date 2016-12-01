@@ -17,3 +17,6 @@
 
 #enhanced hardware abstraction library
 EHA-Lib/
+
+#LCD menu library
+LCDMenu/

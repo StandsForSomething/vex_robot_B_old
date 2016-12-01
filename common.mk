@@ -27,7 +27,11 @@ ASMEXT=s
 CEXT=c
 CPPEXT=cpp
 HEXT=h
-INCLUDE=-I$(ROOT)/include -I$(ROOT)/src
+INCLUDE=\
+	-I$(ROOT)/EHA-Lib/src -I$(ROOT)/EHA-Lib/include\
+	-I$(ROOT)/LCDMenu/src -I$(ROOT)/LCDMenu/include\
+	-I$(ROOT)/include -I$(ROOT)/src
+
 OUTBIN=output.bin
 OUTNAME=output.elf
 
