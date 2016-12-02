@@ -24,5 +24,14 @@ sensor powerExpandJumper = {12, DIGITAL, true};
 
 //analog
 sensor powerExpand = {1, ANALOG, false};
-//sensor tileSelect = {2, ANALOG, false};
-//sensor movementSelect = {3, ANALOG, false};
+sensor autoSelect = {2, ANALOG, false};
+
+//encoders
+encoder encoderLeft;
+encoder encoderRight;
+
+void encoderSetup()
+{
+    initEncoderTW(&encoderLeft, 2, 3, false, TORQUE, COUNTS, 1.0);
+    initEncoderTW(&encoderRight, 4, 5, false, TORQUE, COUNTS, 1.0);
+}

@@ -19,14 +19,17 @@ extern sensor powerExpandJumper;    //digital port 2, input, reversed
 
 //analog
 extern sensor powerExpand;         //analog port 1, not reversed
-//extern sensor tileSelect;        //analog port 2, not reversed
-//extern sensor movementSelect;    //analog port 3, not reversed
+extern sensor autoSelect;        //analog port 2, not reversed
+
+extern encoder encoderLeft;
+extern encoder encoderRight;
+
+void encoderSetup();
 
 //definition for cortex pins
 #define DRIVE_CONTROL_JUMP 1
 #define POWER_EXPAND_JUMP 12       //digital port 2
 
 #define POWER_EXPAND 13            //analog port 1
-//#define TILE_SELECT 14           //analog port 2
-//#define MOVE_SELECT 15           //analog port 3
+#define AUTO_SELECT 14           //analog port 2
 #endif

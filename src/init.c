@@ -72,5 +72,12 @@ void initializeIO()
 
 void initialize()
 {
+    printf("encoders setup\n\r");
+    encoderSetup();
+    printf("LCD display\n\r");
+    lcdInit(uart1);
+    lcdClear(uart1);
+    selectionPot = autoSelect;
+    taskCreate(LCDMenuTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
     printf("initialized\n\r");
 }
