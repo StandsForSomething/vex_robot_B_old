@@ -66,6 +66,14 @@ void initEncoder(encoder *initEncoder, int port1, int port2, bool reversed,
     *initEncoder = tempEncoder;
 }
 
+void initEncoderTW(encoder *encoderToInit, int port1, int port2, bool reversed,
+                   motorGearing motorGearing, encoderGetType encoderGetType,
+                   float gearRatio)
+{
+    initEncoder(encoderToInit, port1, port2, reversed, motorGearing, TWO_WIRE,
+                encoderGetType, gearRatio);
+}
+
 int motorGroupAdd(motor *motorToAdd, motorGroup *groupToChange)
 {
     motorGroup tempGroup = *groupToChange;
