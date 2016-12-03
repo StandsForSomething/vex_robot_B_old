@@ -99,7 +99,7 @@ void operatorControl()
             DriverMode = BACK;         //Change mode to BACK
 
         //deadzones for each of the joysticks to prevent motor whine
-        if ((abs(C1LY) > 20 || abs(C1RY) > 20))
+        if (abs(C1LY) > 20 || abs(C1RY) > 20 || abs(C1RX))
         {
             //switch to change driver configuration
             switch (DriverMode)
