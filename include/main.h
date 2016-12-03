@@ -44,9 +44,11 @@ b * necessarily having to see the code (and therefore causing a multiple definit
 #define MAIN_H_
 
 #include <API.h>
-#include "../EHA-Lib/include/hardwareAbstraction.h"
+#include "hardwareAbstraction.h"
 #include "motorsAndSensors.h"
-#include "../EHA-Lib/include/joystick.h"
+#include "joystick.h"
+#include "LCDMenu.h"
+#include "movement.h"
 
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
