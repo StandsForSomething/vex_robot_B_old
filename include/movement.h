@@ -1,14 +1,17 @@
 #ifndef MOVEMENT_H_
 #define MOVEMENT_H_
-#include "main.h"
 typedef enum direction
 {
-    FORWARD, BACKWARD, LEFT, RIGHT, TURN_LEFT, TURN_RIGHT
+    FORWARD,
+    BACKWARD,
+    LEFT_TURN,
+    RIGHT_TURN,
+    LEFT_TURN_WIDE,
+    RIGHT_TURN_WIDE,
+    STOP
     }direction;
 
 //function prototypes
-extern void driveMove(direction direction, int speed);
-extern void driveStop();
-extern void driveMoveTo(direction direction, int speed,
-                        sensor encoder, int count);
+void controlDrive(int speed, direction dir);
+void controlDriveEnc(int speed, direction dir, int counts);
 #endif //MOVEMENT_H_
