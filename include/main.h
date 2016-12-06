@@ -48,6 +48,7 @@ b * necessarily having to see the code (and therefore causing a multiple definit
 #include "joystick.h"
 #include "motorsAndSensors.h"
 #include "LCDMenu.h"
+#include "movement.h"
 
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
