@@ -167,7 +167,7 @@ double getEncoder(encoder encoder)
 //returns the value of the given encoder.
 double getEncoderMode(encoder encoder, encoderGetType encoderGetType)
 {
-    double returnValue = 0;
+    double returnValue = 0.0;
 
     //in addition to returnValue since certain functions used expect an int
     //pointer as an argument.
@@ -218,7 +218,7 @@ double getEncoderMode(encoder encoder, encoderGetType encoderGetType)
             break;
 
         case ROTATIONS:
-            returnValue = encoderGet(encoder.shaftEncoder) / 360;
+            returnValue = encoderGet(encoder.shaftEncoder) / 360.0;
             break;
 
         case RPM:
