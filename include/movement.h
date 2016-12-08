@@ -13,5 +13,5 @@ typedef enum direction
 
 //function prototypes
 void controlDrive(int speed, direction dir);
-void controlDriveEnc(int speed, direction dir, int counts);
+void controlDriveEnc(int speed, direction dir, double counts);
 #endif //MOVEMENT_H_

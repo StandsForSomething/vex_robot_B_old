@@ -86,9 +86,12 @@ void controlDrive(int speed, direction dir)
         break;
     }
 }
-void controlDriveEnc(int speed, direction dir, int counts)
+void controlDriveEnc(int speed, direction dir, double counts)
 {
     controlDrive(speed, dir);
+    encoderReset(encoderLeft.shaftEncoder);
+    encoderReset(encoderRight.shaftEncoder);
+    
     if(dir == LEFT_TURN_WIDE)
     {
         while(getSensor(encoderRight.parent) < counts){delay(20);}
@@ -97,6 +100,11 @@ void controlDriveEnc(int speed, direction dir, int counts)
     else if(dir == BACKWARD || dir == LEFT_TURN)
     {
             while(getSensor(encoderLeft.parent) > counts){delay(20);}
+    }
+
+    else
+    {
+        while(getEncoder(encoderLeft) < counts){delay(20);}
     }
 
     controlDrive(0, STOP);
