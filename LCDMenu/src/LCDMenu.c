@@ -48,7 +48,6 @@ void LCDMenuTask(void *ignore)
             selectionRangeLower = selectionRangeUpper;
             selectionRangeUpper += potSelectionSize;
         }
-        printf("%d\n\r",currentSelection);
         delay(20);
     }
 }
