@@ -56,5 +56,45 @@
 
 void autonomous()
 {
+    printf("%d\n\r", currentSelection);
+    switch(currentSelection)
+    {
+    case 0:
+        printf("auton 1\n\r");
+        controlDriveEnc(127, FORWARD,   20);
+        controlDriveEnc(127, LEFT_TURN, 50);
+        controlDriveEnc(127, FORWARD,   100);
+        controlDriveEnc(127, BACKWARD,  20);
+        controlDriveEnc(127, FORWARD,   20);
+        controlDriveEnc(127, BACKWARD,  20);
+        controlDriveEnc(127, FORWARD,   20);
+        controlDriveEnc(127, BACKWARD,  20);
+        controlDriveEnc(127, FORWARD,   20);
 
+    case 1:
+        printf("auton 2\n\r");
+        controlDriveEnc(127, FORWARD,   20);
+        controlDriveEnc(127, LEFT_TURN, 50);
+        controlDriveEnc(127, FORWARD,   100);
+        controlDriveEnc(127, BACKWARD,  100);
+        break;
+
+    case 2:
+        printf("auton 3\n\r");
+        controlDriveEnc(127, FORWARD, 0.8);
+        controlDriveEnc(127, RIGHT_TURN_WIDE, 1.3);
+        controlDriveEnc(127, FORWARD, 2.2);
+        controlDriveEnc(127, BACKWARD, -1.8);
+        controlDriveEnc(127, LEFT_TURN, -0.5);
+        controlDriveEnc(127, FORWARD, 0.6);
+        controlDriveEnc(127, RIGHT_TURN, 0.6);
+        controlDriveEnc(127, FORWARD, 5);
+        break;
+
+    default:
+        printf("error, not autonomous\n\r");
+    break;
+    }
+
+    printf("end autonomous\n\r");
 }
