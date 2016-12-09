@@ -32,6 +32,6 @@ encoder encoderRight;
 
 void encoderSetup()
 {
-    initEncoderIme(&encoderLeft, 1, false, TORQUE, COUNTS, 1.0);
-    initEncoderIme(&encoderRight, 2, false, TORQUE, COUNTS, 1.0);
+    initEncoderIme(&encoderLeft, 0, false, TORQUE, ROTATIONS, 1.0);
+    initEncoderIme(&encoderRight, 1, false, TORQUE, ROTATIONS, 1.0);
 }
