@@ -71,10 +71,12 @@ void initializeIO()
 
 void initialize()
 {
+    imeInitializeAll();
     lcdInit(uart1);
     lcdClear(uart1);
     selectionPot = autoSelect;
-    newItem("2 Stars", NULL);
-    newItem("2 stars + 3 in far", NULL);
+    newItem("auton 1", NULL);
+    newItem("auton 2", NULL);
+    newItem("auton 3", NULL);
     taskCreate(LCDMenuTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 }
