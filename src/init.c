@@ -71,7 +71,7 @@ void initializeIO()
 
 void initialize()
 {
-    imeInitializeAll();
+    encoderSetup();
     lcdInit(uart1);
     lcdClear(uart1);
     selectionPot = autoSelect;

@@ -4,15 +4,15 @@
 //////////
 
 //right motors
-motor RFDriveI = {2, true};
+motor RFDriveI = {2, false};
 motor RFDriveO = {3, false};
-motor RBDriveI = {4, true};
+motor RBDriveI = {4, false};
 motor RBDriveO = {5, false};
 
 //left motors
-motor LFDriveI = {6, false};
+motor LFDriveI = {6, true};
 motor LFDriveO = {7, true};
-motor LBDriveI = {8, false};
+motor LBDriveI = {8, true};
 motor LBDriveO = {9, true};
 
 ///////////
@@ -32,6 +32,6 @@ encoder encoderRight;
 
 void encoderSetup()
 {
-    initEncoderIme(&encoderLeft, 0, false, TORQUE, ROTATIONS, 1.0);
-    initEncoderIme(&encoderRight, 1, false, TORQUE, ROTATIONS, 1.0);
+    initEncoderTW(&encoderLeft, 1, 2, false, SPEED, ROTATIONS, 1.0);
+    initEncoderTW(&encoderRight, 3, 4, false, SPEED, ROTATIONS, 1.0);
 }
