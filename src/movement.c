@@ -88,6 +88,8 @@ void controlDrive(int speed, direction dir)
 }
 void controlDriveEnc(int speed, direction dir, int counts)
 {
+    encoderReset(encoderRight.shaftEncoder);
+    encoderReset(encoderLeft.shaftEncoder);
     controlDrive(speed, dir);
     if(dir == LEFT_TURN_WIDE)
     {
