@@ -88,24 +88,34 @@ void controlDrive(int speed, direction dir)
 }
 void controlDriveEnc(int speed, direction dir, double counts)
 {
-    controlDrive(speed, dir);
-    encoderReset(encoderLeft.shaftEncoder);
     encoderReset(encoderRight.shaftEncoder);
-    
+    encoderReset(encoderLeft.shaftEncoder);
+    controlDrive(speed, dir);
     if(dir == LEFT_TURN_WIDE)
     {
-        while(getSensor(encoderRight.parent) < counts){delay(20);}
+        while(getSensor(encoderRight.parent) < counts)
+        {
+            printf("%f\n\r", getEncoder(encoderRight));
+            delay(20);
+        }
     }
 
     else if(dir == BACKWARD || dir == LEFT_TURN)
     {
-            while(getSensor(encoderLeft.parent) > counts){delay(20);}
+        while(getSensor(encoderLeft.parent) > counts)
+        {
+            printf("%f\n\r", getEncoder(encoderLeft));
+            delay(20);
+        }
     }
 
     else
     {
-        while(getEncoder(encoderLeft) < counts){delay(20);}
+        while(getSensor(encoderLeft.parent) < counts)
+        {
+            printf("%f\n\r", getEncoder(encoderLeft));
+        delay(20);
+        }
     }
-
     controlDrive(0, STOP);
 }
