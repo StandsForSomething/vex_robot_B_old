@@ -67,6 +67,10 @@ void operatorControl()
     //used in a switch for different control modes.
     typedef enum DriveMode {FRONT, BACK, LEFT, RIGHT}DriveMode;
     DriveMode DriverMode = FRONT;
+    double turnDivisor = 1.50;
+    double turnDivisorLast = 1.50;
+    bool btn5uPressed = false;
+    bool btn5dPressed = false;
 
     //in the case that the power expander isn't plugged in don't continue until
     //it's plugged in or overriden by placeing a jumper in digital pin 2.
@@ -100,10 +104,45 @@ void operatorControl()
         //only FRONT is currently working corectly, this
         //makes it impossible to use any other mode
         DriverMode = FRONT;
-        
+
+        if(C1_5U && !btn5uPressed && turnDivisor >= 1.0)
+        {
+            turnDivisor -= 0.25;
+            turnDivisorLast = turnDivisor;
+            btn5uPressed = true;
+        }
+
+        else if(!C1_5U)
+        {
+            btn5uPressed = false;
+        }
+
+        if(C1_5D && !btn5dPressed)
+        {
+            turnDivisor += 0.25;
+            turnDivisorLast = turnDivisor;
+            btn5dPressed = true;
+        }
+
+        else if(!C1_5D)
+        {
+            btn5dPressed = false;
+        }
+
+        if(C1_6U)
+        {
+            turnDivisor = 1.0;
+        }
+
+        else
+        {
+            turnDivisor = turnDivisorLast;
+        }
+
         //deadzones for each of the joysticks to prevent motor whine
         if (abs(C1LY) > 20 || abs(C1RY) > 20 || abs(C1RX))
         {
+            printf("%f\n\r",turnDivisor);
             //switch to change driver configuration
             switch (DriverMode)
             {
@@ -111,14 +150,14 @@ void operatorControl()
             case FRONT: //First Mode (8U)
                 //pressing the left joystick forward
                 //will move the robot forward
-                setMotor(LFDriveI,  C1LY + C1LX + C1RX);     //left front wheel
-                setMotor(LFDriveO,  C1LY + C1LX + C1RX);     //left front wheel
-                setMotor(RFDriveI,  C1LY - C1LX - C1RX);     //right front wheel
-                setMotor(RFDriveO,  C1LY - C1LX - C1RX);     //left front wheel
-                setMotor(RBDriveI,  C1LY + C1LX - C1RX);     //right back wheel
-                setMotor(RBDriveO,  C1LY + C1LX - C1RX);     //left front wheel
-                setMotor(LBDriveI,  C1LY - C1LX + C1RX);     //left back wheel
-                setMotor(LBDriveO,  C1LY - C1LX + C1RX);     //left back wheel
+                setMotor(LFDriveI,  C1LY + C1LX + (C1RX / turnDivisor));     //left front wheel
+                setMotor(LFDriveO,  C1LY + C1LX + (C1RX / turnDivisor));     //left front wheel
+                setMotor(RFDriveI,  C1LY - C1LX - (C1RX / turnDivisor));     //right front wheel
+                setMotor(RFDriveO,  C1LY - C1LX - (C1RX / turnDivisor));     //left front wheel
+                setMotor(RBDriveI,  C1LY + C1LX - (C1RX / turnDivisor));     //right back wheel
+                setMotor(RBDriveO,  C1LY + C1LX - (C1RX / turnDivisor));     //left front wheel
+                setMotor(LBDriveI,  C1LY - C1LX + (C1RX / turnDivisor));     //left back wheel
+                setMotor(LBDriveO,  C1LY - C1LX + (C1RX / turnDivisor));     //left back wheel
                 break;
 
             case LEFT: // Second Mode (8L)
