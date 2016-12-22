@@ -56,7 +56,7 @@
 
 void autonomous()
 {
-    printf("%d\n\r", currentSelection);
+    /*printf("%d\n\r", currentSelection);
     switch(currentSelection)
     {
     case 0:
@@ -96,5 +96,5 @@ void autonomous()
     break;
     }
 
-    printf("end autonomous\n\r");
+    printf("end autonomous\n\r");*/
 }

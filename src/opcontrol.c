@@ -77,7 +77,7 @@ void operatorControl()
     //this makes sure the robot can't move unless the issue is fixed becuase once
     //the robot moves it can't legally be fixed.  The option of using a jumper to
     //continue is incase the issue can't be fixed.
-    while(getSensor(powerExpand) < 1000 && getSensor(powerExpandJumper)){delay(20);}
+    //while(getSensor(powerExpand) < 1000 && getSensor(powerExpandJumper)){delay(20);}
 
     //control loop
     while (1)
@@ -150,10 +150,8 @@ void operatorControl()
             case FRONT: //First Mode (8U)
                 //pressing the left joystick forward
                 //will move the robot forward
-                setMotor(LFDriveI,  C1LY + C1LX + (C1RX / turnDivisor));     //left front wheel
-                setMotor(LFDriveO,  C1LY + C1LX + (C1RX / turnDivisor));     //left front wheel
-                setMotor(RFDriveI,  C1LY - C1LX - (C1RX / turnDivisor));     //right front wheel
-                setMotor(RFDriveO,  C1LY - C1LX - (C1RX / turnDivisor));     //left front wheel
+                setMotor(LFDrive,  C1LY + C1LX + (C1RX / turnDivisor));      //left front wheel
+                setMotor(RFDrive,  C1LY - C1LX - (C1RX / turnDivisor));     //left front wheel
                 setMotor(RBDriveI,  C1LY + C1LX - (C1RX / turnDivisor));     //right back wheel
                 setMotor(RBDriveO,  C1LY + C1LX - (C1RX / turnDivisor));     //left front wheel
                 setMotor(LBDriveI,  C1LY - C1LX + (C1RX / turnDivisor));     //left back wheel
@@ -192,10 +190,8 @@ void operatorControl()
         //if joysticks are within deadzones set all drive motors to 0
         else
         {
-            setMotor(LFDriveI, 0);
-            setMotor(LFDriveO, 0);
-            setMotor(RFDriveI, 0);
-            setMotor(RFDriveO, 0);
+            setMotor(LFDrive, 0);
+            setMotor(RFDrive, 0);
             setMotor(LBDriveI, 0);
             setMotor(LBDriveO, 0);
             setMotor(RBDriveI, 0);

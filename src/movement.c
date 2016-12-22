@@ -1,6 +1,6 @@
 #include "main.h"
 
-void controlDrive(int speed, direction dir)
+/*void controlDrive(int speed, direction dir)
 {
     switch(dir)
     {
@@ -119,3 +119,4 @@ void controlDriveEnc(int speed, direction dir, double counts)
     }
     controlDrive(0, STOP);
 }
+*/

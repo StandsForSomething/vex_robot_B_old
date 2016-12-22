@@ -2,16 +2,19 @@
 #define MOTORS_H_
 
 //right motors
-extern motor RFDriveI;     //port 2, reversed
-extern motor RFDriveO;     //port 3, reversed
+extern motor RFDrive;     //port 2, reversed
 extern motor RBDriveI;     //port 2, reversed
 extern motor RBDriveO;     //port 3, reversed
 
 //left motors
-extern motor LFDriveI;     //port 6, not reversed
-extern motor LFDriveO;     //port 7, not reversed
+extern motor LFDrive;     //port 6, not reversed
 extern motor LBDriveI;     //port 2, reversed
 extern motor LBDriveO;     //port 3, reversed
+
+extern motor leftLift1;
+extern motor leftLift2;
+extern motor rightLift1;
+extern motor rightLift2;
 
 //digital
 extern sensor driveControlJumper;
