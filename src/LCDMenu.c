@@ -1,4 +1,5 @@
 #include "main.h"
+#include "LCDMenuSettings.h"
 
 size_t numOfItems = 0;
 LCDItem *LCDMenuItems = NULL;
@@ -33,14 +34,20 @@ void LCDMenuTask(void *ignore)
                 currentSelection = i;
 
                 //display the selection on line 1 of the LCD pluged int uart1
-                lcdSetText(uart1, 1, LCDMenuItems[i].LCDText);
+                lcdPrint(uart1, 1, "%c %s", LCD_POINTER_CHAR,
+                         LCDMenuItems[i].LCDText);
 
                 //if there is more than one item and the last item isn't the
                 //current selection
                 if(numOfItems > 1 && i != numOfItems-1)
                 {
                     //display the next selection
-                    lcdSetText(uart1, 2, LCDMenuItems[i+1].LCDText);
+                    lcdPrint(uart1, 2, "  %s", LCDMenuItems[i+1].LCDText);
+                }
+
+                else
+                {
+                    lcdSetText(uart1, 2, NULL);
                 }
             }
 
@@ -48,7 +55,6 @@ void LCDMenuTask(void *ignore)
             selectionRangeLower = selectionRangeUpper;
             selectionRangeUpper += potSelectionSize;
         }
-        printf("%d\n\r",currentSelection);
         delay(20);
     }
 }
