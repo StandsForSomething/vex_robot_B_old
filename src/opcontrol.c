@@ -197,6 +197,32 @@ void operatorControl()
             setMotor(RBDriveI, 0);
             setMotor(RBDriveO, 0);
         }
+
+        if(C1_6U)
+        {
+            setMotor(leftLift1, 127);
+            setMotor(leftLift2, 127);
+            setMotor(rightLift1, 127);
+            setMotor(rightLift2, 127);
+        }
+
+        else if(C1_6D)
+        {
+            setMotor(leftLift1, -127);
+            setMotor(leftLift2, -127);
+            setMotor(rightLift1, -127);
+            setMotor(rightLift2, -127);
+        }
+
+        else
+        {
+
+            setMotor(leftLift1, 0);
+            setMotor(leftLift2, 0);
+            setMotor(rightLift1, 0);
+            setMotor(rightLift2, 0);
+        }
+
         //motors can only be updated every 20 milliseconds
         delay(20);
     }

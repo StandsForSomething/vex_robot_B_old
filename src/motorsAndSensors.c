@@ -14,10 +14,10 @@ motor LBDriveI = {6, true};
 motor LBDriveO = {7, true};
 
 //lift motors
-motor leftLift1 = {1, true};
-motor leftLift2 = {8, true};
-motor rightLift1 = {10, false};
-motor rightLift2 = {9, false};
+motor leftLift1 = {10, true};
+motor leftLift2 = {9, true};
+motor rightLift1 = {1, false};
+motor rightLift2 = {8, false};
 
 ///////////
 //sensors//
@@ -25,7 +25,6 @@ motor rightLift2 = {9, false};
 //digital
 sensor driveControlJumper = {1, DIGITAL, false};
 sensor powerExpandJumper = {12, DIGITAL, true};
-
 //analog
 sensor powerExpand = {1, ANALOG, false};
 sensor autoSelect = {2, ANALOG, false};
@@ -33,9 +32,11 @@ sensor autoSelect = {2, ANALOG, false};
 //encoders
 encoder encoderLeft;
 encoder encoderRight;
+encoder armEnc;
 
 void encoderSetup()
 {
     initEncoderTW(&encoderLeft, 11, 12, false, SPEED, ROTATIONS, 1.0);
     initEncoderTW(&encoderRight, 8, 9, false, SPEED, ROTATIONS, 1.0);
+    initEncoderTW(&armEnc, 1, 2, false, TORQUE, COUNTS, 1.0);
 }
