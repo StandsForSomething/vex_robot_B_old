@@ -198,29 +198,48 @@ void operatorControl()
             setMotor(RBDriveO, 0);
         }
 
-        if(C1_6U)
+        if(isJoystickConnected(2) && abs(C2LY) > 20)
         {
-            setMotor(leftLift1, 127);
-            setMotor(leftLift2, 127);
-            setMotor(rightLift1, 127);
-            setMotor(rightLift2, 127);
+            setMotor(leftLift1,  C2LY);
+            setMotor(leftLift2,  C2LY);
+            setMotor(rightLift1, C2LY);
+            setMotor(rightLift2, C2LY);
         }
 
-        else if(C1_6D)
+        else if(isJoystickConnected(2))
         {
-            setMotor(leftLift1, -127);
-            setMotor(leftLift2, -127);
-            setMotor(rightLift1, -127);
-            setMotor(rightLift2, -127);
-        }
-
-        else
-        {
-
             setMotor(leftLift1, 0);
             setMotor(leftLift2, 0);
             setMotor(rightLift1, 0);
             setMotor(rightLift2, 0);
+        }
+
+        else if(!isJoystickConnected(2))
+        {
+            if(C1_6U)
+            {
+                setMotor(leftLift1, 127);
+                setMotor(leftLift2, 127);
+                setMotor(rightLift1, 127);
+                setMotor(rightLift2, 127);
+            }
+
+            else if(C1_6D)
+            {
+                setMotor(leftLift1, -127);
+                setMotor(leftLift2, -127);
+                setMotor(rightLift1, -127);
+                setMotor(rightLift2, -127);
+            }
+
+            else
+            {
+
+                setMotor(leftLift1, 0);
+                setMotor(leftLift2, 0);
+                setMotor(rightLift1, 0);
+                setMotor(rightLift2, 0);
+            }
         }
 
         //motors can only be updated every 20 milliseconds
