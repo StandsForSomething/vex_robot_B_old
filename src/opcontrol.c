@@ -140,7 +140,7 @@ void operatorControl()
         }
 
         //deadzones for each of the joysticks to prevent motor whine
-        if (abs(C1LY) > 20 || abs(C1LY) > 20 || abs(C1RX) > 20)
+        if (abs(C1LY) > 20 || abs(C1LX) > 20 || abs(C1RX) > 20)
         {
             printf("%f\n\r",turnDivisor);
             //switch to change driver configuration
