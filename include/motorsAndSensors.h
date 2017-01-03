@@ -30,9 +30,14 @@ extern encoder encoderRight;
 void encoderSetup();
 
 //definition for cortex pins
-#define DRIVE_CONTROL_JUMP 1
-#define POWER_EXPAND_JUMP 12       //digital port 2
+#define ENC_RIGHT_TOP 8
+#define ENC_RIGHT_BOT 9
+#define ENC_LEFT_TOP 11
+#define ENC_LEFT_BOT 12
+
+#define POWER_EXPAND_JUMP 10       //digital port 2
 
 #define POWER_EXPAND 13            //analog port 1
 #define AUTO_SELECT 14           //analog port 2
+#define ARM_POT 15
 #endif

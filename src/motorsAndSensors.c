@@ -23,20 +23,18 @@ motor rightLift2 = {2, false};
 //sensors//
 ///////////
 //digital
-sensor driveControlJumper = {1, DIGITAL, false};
-sensor powerExpandJumper = {12, DIGITAL, true};
+sensor powerExpandJumper = {10, DIGITAL, true};
 //analog
 sensor powerExpand = {1, ANALOG, false};
 sensor autoSelect = {2, ANALOG, false};
+sensor armPot = {3, ANALOG, false};
 
 //encoders
 encoder encoderLeft;
 encoder encoderRight;
-encoder armEnc;
 
 void encoderSetup()
 {
     initEncoderTW(&encoderLeft, 11, 12, false, SPEED, ROTATIONS, 1.0);
     initEncoderTW(&encoderRight, 8, 9, false, SPEED, ROTATIONS, 1.0);
-    initEncoderTW(&armEnc, 1, 2, false, TORQUE, COUNTS, 1.0);
 }
