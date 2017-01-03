@@ -4,20 +4,20 @@
 //////////
 
 //right motors
-motor RFDrive = {2, false};
-motor RBDriveI = {4, false};
-motor RBDriveO = {5, false};
+motor RBDriveI = {3, false};
+motor RBDriveO = {4, false};
+motor RFDrive = {5, false};
 
 //left motors
-motor LFDrive = {3, true};
-motor LBDriveI = {6, true};
-motor LBDriveO = {7, true};
+motor LFDrive = {6, true};
+motor LBDriveI = {7, true};
+motor LBDriveO = {8, true};
 
 //lift motors
 motor leftLift1 = {10, true};
 motor leftLift2 = {9, true};
 motor rightLift1 = {1, false};
-motor rightLift2 = {8, false};
+motor rightLift2 = {2, false};
 
 ///////////
 //sensors//
