@@ -35,6 +35,6 @@ encoder encoderRight;
 
 void encoderSetup()
 {
-    initEncoderTW(&encoderLeft, 11, 12, false, SPEED, ROTATIONS, 1.0);
-    initEncoderTW(&encoderRight, 8, 9, false, SPEED, ROTATIONS, 1.0);
+    initEncoderTW(&encoderLeft, 8, 9, true, SPEED, ROTATIONS, 1.0);
+    initEncoderTW(&encoderRight, 11, 12, false, SPEED, ROTATIONS, 1.0);
 }
