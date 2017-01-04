@@ -17,12 +17,12 @@ extern motor rightLift1;
 extern motor rightLift2;
 
 //digital
-extern sensor driveControlJumper;
 extern sensor powerExpandJumper;    //digital port 2, input, reversed
 
 //analog
 extern sensor powerExpand;         //analog port 1, not reversed
 extern sensor autoSelect;        //analog port 2, not reversed
+extern sensor armPot;
 
 extern encoder encoderLeft;
 extern encoder encoderRight;
