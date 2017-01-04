@@ -56,7 +56,6 @@
 
 void autonomous()
 {
-    /*printf("%d\n\r", currentSelection);
     switch(currentSelection)
     {
     case 0:
@@ -92,9 +91,9 @@ void autonomous()
         break;
 
     default:
-        printf("error, not autonomous\n\r");
+        printf("error, selected autonomous doesn't exist\n\r");
     break;
     }
 
-    printf("end autonomous\n\r");*/
+    printf("end autonomous\n\r");
 }
