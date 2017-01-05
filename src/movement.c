@@ -58,6 +58,24 @@ void controlDrive(int speed, direction dir)
         setMotor(RBDriveO, 0);
         break;
 
+    case LEFT_STRAFE:
+        setMotor(LFDrive, -speed);
+        setMotor(LBDriveI, speed);
+        setMotor(LBDriveO, speed);
+        setMotor(RFDrive, speed);
+        setMotor(RBDriveI, -speed);
+        setMotor(RBDriveO, -speed);
+         break;
+
+    case RIGHT_STRAFE:
+        setMotor(LFDrive, speed);
+        setMotor(LBDriveI, -speed);
+        setMotor(LBDriveO, -speed);
+        setMotor(RFDrive, -speed);
+        setMotor(RBDriveI, speed);
+        setMotor(RBDriveO, speed);
+         break;
+
     case STOP:
         setMotor(LFDrive, 0);
         setMotor(LBDriveI, 0);

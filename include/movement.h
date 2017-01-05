@@ -8,6 +8,8 @@ typedef enum direction
     RIGHT_TURN,
     LEFT_TURN_WIDE,
     RIGHT_TURN_WIDE,
+    LEFT_STRAFE,
+    RIGHT_STRAFE,
     STOP
     }direction;
 
