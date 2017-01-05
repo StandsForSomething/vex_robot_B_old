@@ -105,3 +105,32 @@ void controlDriveEnc(int speed, direction dir, double counts)
     }
     controlDrive(0, STOP);
 }
+
+void controlLift(int speed)
+{
+    setMotor(leftLift1, speed);
+    setMotor(leftLift2, speed);
+    setMotor(rightLift1, speed);
+    setMotor(rightLift2, speed);
+}
+
+void controlLiftPot(int speed, int potValue)
+{
+    controlLift(speed);
+    if(speed >= 0)
+    {
+        while(getSensor(armPot) < potValue)
+        {
+            printf("%f\n\r", getSensor(armPot));
+        }
+    }
+
+    else
+    {
+        while(getSensor(armPot) < potValue)
+        {
+            printf("%f\n\r", getSensor(armPot));
+        }
+    }
+    controlLift(0);
+}
