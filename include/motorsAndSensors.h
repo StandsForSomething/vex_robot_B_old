@@ -22,8 +22,8 @@ extern sensor powerExpandJumper;    //digital port 2, input, reversed
 //analog
 extern sensor powerExpand;         //analog port 1, not reversed
 extern sensor autoSelect;        //analog port 2, not reversed
-extern sensor armPot;
 
+extern encoder armEnc;
 extern encoder encoderLeft;
 extern encoder encoderRight;
 
@@ -34,10 +34,11 @@ void encoderSetup();
 #define ENC_RIGHT_BOT 9
 #define ENC_LEFT_TOP 11
 #define ENC_LEFT_BOT 12
+#define ARM_ENC_TOP 6
+#define ARM_ENC_BOT 7
 
 #define POWER_EXPAND_JUMP 10       //digital port 2
 
 #define POWER_EXPAND 13            //analog port 1
 #define AUTO_SELECT 14           //analog port 2
-#define ARM_POT 15
 #endif

@@ -132,42 +132,42 @@ void controlLift(int speed)
     setMotor(rightLift2, speed);
 }
 
-typedef struct controlLiftPotArgs
+typedef struct controlLiftEncArgs
 {
     int speed;
-    int potValue;
-}controlLiftPotArgs;
+    double encValue;
+}controlLiftEncArgs;
 
-void controlLiftPotTask(void *funcArgs)
+void controlLiftEncTask(void *funcArgs)
 {
-    controlLiftPotArgs* args = funcArgs;
+    controlLiftEncArgs* args = funcArgs;
     controlLift(args->speed);
     if(args->speed >= 0)
     {
-        while(getSensor(armPot) < args->potValue)
+        while(getSensor(armEnc.parent) < args->encValue)
         {
-            printf("%f\n\r", getSensor(armPot));
+            printf("%f\n\r", getSensor(armEnc.parent));
             delay(20);
         }
     }
 
     else
     {
-        while(getSensor(armPot) < args->potValue)
+        while(getSensor(armEnc.parent) < args->encValue)
         {
-            printf("%f\n\r", getSensor(armPot));
+            printf("%f\n\r", getSensor(armEnc.parent));
             delay(20);
         }
     }
     controlLift(0);
 }
 
-void controlLiftPot(int speed, int potValue, bool waitForTaskEnd)
+void controlLiftEnc(int speed, double encValue, bool waitForTaskEnd)
 {
-    controlLiftPotArgs args = {speed, potValue};
+    controlLiftEncArgs args = {speed, encValue};
 
     TaskHandle liftControl =
-        taskCreate(controlLiftPotTask,
+        taskCreate(controlLiftEncTask,
                    TASK_DEFAULT_STACK_SIZE, &args, TASK_PRIORITY_DEFAULT);
 
     if(waitForTaskEnd)

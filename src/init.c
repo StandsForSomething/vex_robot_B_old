@@ -53,7 +53,8 @@ void initializeIO()
     pinMode(ENC_RIGHT_BOT, INPUT);
     pinMode(ENC_LEFT_TOP, INPUT);
     pinMode(ENC_LEFT_BOT, INPUT);
-    pinMode(ARM_POT, INPUT_ANALOG);
+    pinMode(ARM_ENC_TOP, INPUT);
+    pinMode(ARM_ENC_BOT, INPUT);
     pinMode(POWER_EXPAND_JUMP, INPUT);
     pinMode(POWER_EXPAND, INPUT_ANALOG);
 }

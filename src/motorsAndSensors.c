@@ -32,9 +32,11 @@ sensor armPot = {3, ANALOG, false};
 //encoders
 encoder encoderLeft;
 encoder encoderRight;
+encoder armEnc;
 
 void encoderSetup()
 {
+    initEncoderTW(&armEnc, 6, 7, true, TORQUE, ROTATIONS, 1.0);
     initEncoderTW(&encoderLeft, 8, 9, true, SPEED, ROTATIONS, 1.0);
     initEncoderTW(&encoderRight, 11, 12, false, SPEED, ROTATIONS, 1.0);
 }
