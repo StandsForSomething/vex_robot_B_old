@@ -132,23 +132,46 @@ void controlLift(int speed)
     setMotor(rightLift2, speed);
 }
 
-void controlLiftPot(int speed, int potValue)
+typedef struct controlLiftPotArgs
 {
-    controlLift(speed);
-    if(speed >= 0)
+    int speed;
+    int potValue;
+}controlLiftPotArgs;
+
+void controlLiftPotTask(void *funcArgs)
+{
+    controlLiftPotArgs* args = funcArgs;
+    controlLift(args->speed);
+    if(args->speed >= 0)
     {
-        while(getSensor(armPot) < potValue)
+        while(getSensor(armPot) < args->potValue)
         {
             printf("%f\n\r", getSensor(armPot));
+            delay(20);
         }
     }
 
     else
     {
-        while(getSensor(armPot) < potValue)
+        while(getSensor(armPot) < args->potValue)
         {
             printf("%f\n\r", getSensor(armPot));
+            delay(20);
         }
     }
     controlLift(0);
+}
+
+void controlLiftPot(int speed, int potValue, bool waitForTaskEnd)
+{
+    controlLiftPotArgs args = {speed, potValue};
+
+    TaskHandle liftControl =
+        taskCreate(controlLiftPotTask,
+                   TASK_DEFAULT_STACK_SIZE, &args, TASK_PRIORITY_DEFAULT);
+
+    if(waitForTaskEnd)
+    {
+        while(taskGetState(liftControl) == TASK_RUNNING){delay(20);}
+    }
 }
