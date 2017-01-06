@@ -80,7 +80,9 @@ void autonomous()
 
     case 2:
         printf("auton 3\n\r");
-        controlDriveEnc(127, FORWARD, 0.8);
+        controlLiftEnc(127, 200, true);
+        controlDriveEnc(127, BACKWARD, 0.5);
+        controlDriveEnc(127, FORWARD, 1.3);
         controlDriveEnc(127, RIGHT_TURN_WIDE, 1.3);
         controlDriveEnc(127, FORWARD, 2.2);
         controlDriveEnc(127, BACKWARD, -1.8);
@@ -88,6 +90,13 @@ void autonomous()
         controlDriveEnc(127, FORWARD, 0.6);
         controlDriveEnc(127, RIGHT_TURN, 0.6);
         controlDriveEnc(127, FORWARD, 5);
+        break;
+
+    case 3:
+        printf("auton 4\n\r");
+        controlLiftEnc(127, 1000, false);
+        controlDriveEnc(127, LEFT_STRAFE, 0.4);
+        controlDriveEnc(127, BACKWARD, -4.0);
         break;
 
     default:
