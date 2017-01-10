@@ -80,9 +80,10 @@ void initialize()
     printf("LCD display\n\r");
     lcdInit(uart1);
     lcdClear(uart1);
-    newItem("auton 1", NULL);
-    newItem("auton 2", NULL);
-    newItem("auton 3", NULL);
+    newItem("1: corner star", NULL);
+    newItem("2: 1 + return", NULL);
+    newItem("3: the big one", NULL);
+    newItem("3: hang", NULL);
     selectionPot = autoSelect;
     taskCreate(LCDMenuTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
     printf("initialized\n\r");

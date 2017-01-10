@@ -54,34 +54,63 @@
  * disable/enable cycle.
  */
 
+
+void moveCornerStar()
+{
+    controlDriveEnc(127, FORWARD,   1.5);
+    controlDriveEnc(127, LEFT_TURN, 2);
+    controlDriveEnc(127, FORWARD,   2);
+}
+
+void scoreCornerStar()
+{
+    moveCornerStar();
+    controlDriveEnc(127, FORWARD,   10);
+}
+
+void pushStarsUnderFence(int times)
+{
+    for(int i = 0; i < times; i++)
+    {
+        controlDriveEnc(127, BACKWARD,  -0.5);
+        controlDriveEnc(127, FORWARD,   0.5);
+    }
+}
+
+void expand()
+{
+    controlLiftEnc(127, 10, false);
+    controlDriveEnc(127, BACKWARD, -0.3);
+}
+
+void hang()
+{
+    controlLiftEnc(127, 10, false);
+    controlDriveEnc(127, FORWARD, 0.4);
+    controlLiftEnc(-127, 270, true);
+}
+
 void autonomous()
 {
     switch(currentSelection)
     {
     case 0:
-        printf("auton 1\n\r");
-        controlDriveEnc(127, FORWARD,   20);
-        controlDriveEnc(127, LEFT_TURN, 50);
-        controlDriveEnc(127, FORWARD,   100);
-        controlDriveEnc(127, BACKWARD,  20);
-        controlDriveEnc(127, FORWARD,   20);
-        controlDriveEnc(127, BACKWARD,  20);
-        controlDriveEnc(127, FORWARD,   20);
-        controlDriveEnc(127, BACKWARD,  20);
-        controlDriveEnc(127, FORWARD,   20);
+        printf("auton: 1: corner star\n\r");
+        expand();
+        scoreCornerStar();
+        pushStarsUnderFence(4);
+        break;
 
     case 1:
-        printf("auton 2\n\r");
-        controlDriveEnc(127, FORWARD,   20);
-        controlDriveEnc(127, LEFT_TURN, 50);
-        controlDriveEnc(127, FORWARD,   100);
-        controlDriveEnc(127, BACKWARD,  100);
+        printf("auton: 2: 1 + return\n\r");
+        expand();
+        scoreCornerStar();
+        controlDriveEnc(127, BACKWARD,  -10.0);
         break;
 
     case 2:
-        printf("auton 3\n\r");
-        controlLiftEnc(127, 200, true);
-        controlDriveEnc(127, BACKWARD, 0.5);
+        printf("auton: 3: the big one\n\r");
+        expand();
         controlDriveEnc(127, FORWARD, 1.3);
         controlDriveEnc(127, RIGHT_TURN_WIDE, 1.3);
         controlDriveEnc(127, FORWARD, 2.2);
@@ -93,10 +122,10 @@ void autonomous()
         break;
 
     case 3:
-        printf("auton 4\n\r");
-        controlLiftEnc(127, 1000, false);
-        controlDriveEnc(127, LEFT_STRAFE, 0.4);
-        controlDriveEnc(127, BACKWARD, -4.0);
+        printf("auton: 4: hang\n\r");
+        expand();
+        moveCornerStar();
+        hang();
         break;
 
     default:
