@@ -80,14 +80,13 @@ void pushStarsUnderFence(int times)
 void expand()
 {
     controlLiftEnc(127, 10, false);
-    controlDriveEnc(127, BACKWARD, -0.3);
+    controlDriveEnc(127, BACKWARD, -0.5);
 }
 
 void hang()
 {
-    controlLiftEnc(127, 10, false);
-    controlDriveEnc(127, FORWARD, 0.4);
-    controlLiftEnc(-127, 270, true);
+    controlDriveEnc(127, FORWARD, 0.5);
+    controlLiftEnc(-127, -180.0, true);
 }
 
 void autonomous()
@@ -124,7 +123,9 @@ void autonomous()
     case 3:
         printf("auton: 4: hang\n\r");
         expand();
+        controlLiftEnc(127, 135, false);
         moveCornerStar();
+        controlDriveEnc(127, BACKWARD, -2.2);
         hang();
         break;
 
