@@ -97,7 +97,7 @@ void controlDriveEnc(int speed, direction dir, double counts)
     controlDrive(speed, dir);
     if(dir == LEFT_TURN_WIDE)
     {
-        while(getSensor(encoderRight.parent) < counts)
+        while(getEncoder(encoderRight) < counts)
         {
             printf("%f\n\r", getEncoder(encoderRight));
             delay(20);
@@ -106,21 +106,22 @@ void controlDriveEnc(int speed, direction dir, double counts)
 
     else if(dir == BACKWARD || dir == LEFT_TURN)
     {
-        while(getSensor(encoderLeft.parent) > counts)
+        while(getEncoder(encoderLeft) > counts)
         {
-            printf("%f\n\r", getEncoder(encoderLeft));
+           printf("%f\n\r", getEncoder(encoderLeft));
             delay(20);
         }
     }
 
     else
     {
-        while(getSensor(encoderLeft.parent) < counts)
+        while(getEncoder(encoderLeft) < counts)
         {
             printf("%f\n\r", getEncoder(encoderLeft));
-        delay(20);
+            delay(20);
         }
     }
+
     controlDrive(0, STOP);
 }
 
@@ -140,22 +141,25 @@ typedef struct controlLiftEncArgs
 
 void controlLiftEncTask(void *funcArgs)
 {
-    controlLiftEncArgs* args = funcArgs;
-    controlLift(args->speed);
-    if(args->speed >= 0)
+    controlLiftEncArgs* argsPointer = funcArgs;
+    controlLiftEncArgs args = *argsPointer;
+
+    controlLift(args.speed);
+    encoderReset(armEnc.shaftEncoder);
+    if(args.speed >= 0)
     {
-        while(getSensor(armEnc.parent) < args->encValue)
+        while(getSensor(armEnc.parent) < args.encValue)
         {
-            printf("%f\n\r", getSensor(armEnc.parent));
+            //printf("%f\n\r", getSensor(armEnc.parent));
             delay(20);
         }
     }
 
     else
     {
-        while(getSensor(armEnc.parent) < args->encValue)
+        while(getSensor(armEnc.parent) > args.encValue)
         {
-            printf("%f\n\r", getSensor(armEnc.parent));
+            //printf("%f\n\r", getSensor(armEnc.parent));
             delay(20);
         }
     }
@@ -166,12 +170,17 @@ void controlLiftEnc(int speed, double encValue, bool waitForTaskEnd)
 {
     controlLiftEncArgs args = {speed, encValue};
 
-    TaskHandle liftControl =
-        taskCreate(controlLiftEncTask,
-                   TASK_DEFAULT_STACK_SIZE, &args, TASK_PRIORITY_DEFAULT);
-
-    if(waitForTaskEnd)
+    if(!waitForTaskEnd)
     {
-        while(taskGetState(liftControl) == TASK_RUNNING){delay(20);}
+        TaskHandle liftControl =
+            taskCreate(controlLiftEncTask,
+                       TASK_DEFAULT_STACK_SIZE, &args, TASK_PRIORITY_DEFAULT);
+        delay(20);
     }
+
+    else
+    {
+        controlLiftEncTask(&args);
+    }
+    printf("exit\n\r");
 }
