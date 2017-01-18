@@ -54,18 +54,25 @@
  * disable/enable cycle.
  */
 
+#define RED false
+#define BLUE true
+
+bool color = BLUE;
 
 void moveCornerStar()
 {
+    controlDriveEnc(127, FORWARD,   1.45);
+    if(color == BLUE)
+    {
+        controlDriveEnc(127, RIGHT_TURN, 1.0);
+    }
     controlDriveEnc(127, FORWARD,   1.5);
-    controlDriveEnc(127, LEFT_TURN, 2);
-    controlDriveEnc(127, FORWARD,   2);
 }
 
 void scoreCornerStar()
 {
     moveCornerStar();
-    controlDriveEnc(127, FORWARD,   10);
+    controlDriveEnc(127, FORWARD,   10.0);
 }
 
 void pushStarsUnderFence(int times)
@@ -79,8 +86,8 @@ void pushStarsUnderFence(int times)
 
 void expand()
 {
-    controlLiftEnc(127, 10, false);
-    controlDriveEnc(127, BACKWARD, -0.5);
+    controlLiftEnc(127, 35, false);
+    controlDriveEnc(127, BACKWARD, -0.7);
 }
 
 void hang()
@@ -123,8 +130,9 @@ void autonomous()
     case 3:
         printf("auton: 4: hang\n\r");
         expand();
-        controlLiftEnc(127, 135, false);
         moveCornerStar();
+        controlLiftEnc(127, 70, false);
+        controlDriveEnc(127, RIGHT_TURN, 0.25);
         controlDriveEnc(127, BACKWARD, -2.2);
         hang();
         break;

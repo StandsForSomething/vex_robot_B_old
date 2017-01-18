@@ -37,6 +37,6 @@ encoder armEnc;
 void encoderSetup()
 {
     initEncoderTW(&armEnc, 6, 7, false, TORQUE, COUNTS, 1.0);
-    initEncoderTW(&encoderLeft, 8, 9, false, SPEED, ROTATIONS, 1.0);
-    initEncoderTW(&encoderRight, 11, 12, false, SPEED, ROTATIONS, 1.0);
+    initEncoderTW(&encoderLeft, 11, 12, true, SPEED, ROTATIONS, 1.0);
+    initEncoderTW(&encoderRight, 8, 9, false, SPEED, ROTATIONS, 1.0);
 }

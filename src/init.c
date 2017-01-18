@@ -83,7 +83,8 @@ void initialize()
     newItem("1: corner star", NULL);
     newItem("2: 1 + return", NULL);
     newItem("3: the big one", NULL);
-    newItem("3: hang", NULL);
+    newItem("4: hang", NULL);
+    newItem("5: test", NULL);
     selectionPot = autoSelect;
     taskCreate(LCDMenuTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
     printf("initialized\n\r");
