@@ -61,32 +61,50 @@ bool color = BLUE;
 
 void moveCornerStar()
 {
-    controlDriveEnc(127, FORWARD,   1.45);
+    controlDriveEnc(127, FORWARD,   1.7);
     if(color == BLUE)
     {
-        controlDriveEnc(127, RIGHT_TURN, 1.0);
+        controlDriveEnc(127, RIGHT_TURN, 0.73);
+        controlDriveEnc(127, FORWARD, 0.3);
+        controlDriveEnc(127, LEFT_STRAFE, 2);
+        controlDriveEnc(127, RIGHT_STRAFE, -0.34);
     }
-    controlDriveEnc(127, FORWARD,   1.5);
+
+    else if(color == RED)
+    {
+        controlDriveEnc(127, LEFT_TURN, -0.73);
+        controlDriveEnc(127, LEFT_STRAFE, 0.7);
+        controlDriveEnc(127, RIGHT_STRAFE, -0.3);
+    }
+    controlDriveEnc(127, FORWARD,   1.1);
 }
 
 void scoreCornerStar()
 {
     moveCornerStar();
-    controlDriveEnc(127, FORWARD,   10.0);
+    controlDriveEnc(127, FORWARD,   1.5);
 }
 
 void pushStarsUnderFence(int times)
 {
     for(int i = 0; i < times; i++)
     {
-        controlDriveEnc(127, BACKWARD,  -0.5);
         controlDriveEnc(127, FORWARD,   0.5);
+        controlDriveEnc(127, BACKWARD,  -0.5);
     }
+}
+
+void starsOffFence()
+{
+    controlLiftEnc(127, 20, true);
+    controlLiftEnc(-127, -20, true);
+    controlDriveEnc(127, RIGHT_STRAFE, -1.2);
+    controlLiftEnc(127, 10, true);
 }
 
 void expand()
 {
-    controlLiftEnc(127, 35, false);
+    controlLiftEnc(127, 27, false);
     controlDriveEnc(127, BACKWARD, -0.7);
 }
 
@@ -100,22 +118,39 @@ void autonomous()
 {
     switch(currentSelection)
     {
-    case 0:
+    case 1:
         printf("auton: 1: corner star\n\r");
         expand();
         scoreCornerStar();
-        pushStarsUnderFence(4);
         break;
 
-    case 1:
+    case 2:
         printf("auton: 2: 1 + return\n\r");
         expand();
         scoreCornerStar();
         controlDriveEnc(127, BACKWARD,  -10.0);
         break;
 
-    case 2:
-        printf("auton: 3: the big one\n\r");
+    case 3:
+        printf("auton: 3: 1 + fence\n\r");
+        expand();
+        scoreCornerStar();
+        starsOffFence();
+        break;
+
+
+    case 5: //not working yet
+        printf("auton: 5: hang\n\r");
+        expand();
+        moveCornerStar();
+        controlLiftEnc(127, 70, false);
+        controlDriveEnc(127, RIGHT_TURN, 0.25);
+        controlDriveEnc(127, BACKWARD, -2.2);
+        hang();
+        break;
+
+    case 100:  //not working yet
+        printf("auton: 100: the big one\n\r");
         expand();
         controlDriveEnc(127, FORWARD, 1.3);
         controlDriveEnc(127, RIGHT_TURN_WIDE, 1.3);
@@ -127,15 +162,6 @@ void autonomous()
         controlDriveEnc(127, FORWARD, 5);
         break;
 
-    case 3:
-        printf("auton: 4: hang\n\r");
-        expand();
-        moveCornerStar();
-        controlLiftEnc(127, 70, false);
-        controlDriveEnc(127, RIGHT_TURN, 0.25);
-        controlDriveEnc(127, BACKWARD, -2.2);
-        hang();
-        break;
 
     default:
         printf("error, selected autonomous doesn't exist\n\r");

@@ -104,7 +104,7 @@ void controlDriveEnc(int speed, direction dir, double counts)
         }
     }
 
-    else if(dir == BACKWARD || dir == LEFT_TURN)
+    else if(dir == BACKWARD || dir == LEFT_TURN || counts < 0)
     {
         while(getEncoder(encoderLeft) > counts)
         {
