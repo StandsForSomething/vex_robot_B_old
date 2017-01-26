@@ -57,25 +57,7 @@ void controlDrive(int speed, direction dir)
         setMotor(RBDriveI, 0);
         setMotor(RBDriveO, 0);
         break;
-
-    case LEFT_STRAFE:
-        setMotor(LFDrive, -speed);
-        setMotor(LBDriveI, speed);
-        setMotor(LBDriveO, speed);
-        setMotor(RFDrive, speed);
-        setMotor(RBDriveI, -speed);
-        setMotor(RBDriveO, -speed);
-         break;
-
-    case RIGHT_STRAFE:
-        setMotor(LFDrive, speed);
-        setMotor(LBDriveI, -speed);
-        setMotor(LBDriveO, -speed);
-        setMotor(RFDrive, -speed);
-        setMotor(RBDriveI, speed);
-        setMotor(RBDriveO, speed);
-         break;
-
+        
     case STOP:
         setMotor(LFDrive, 0);
         setMotor(LBDriveI, 0);
@@ -127,10 +109,8 @@ void controlDriveEnc(int speed, direction dir, double counts)
 
 void controlLift(int speed)
 {
-    setMotor(leftLift1, speed);
-    setMotor(leftLift2, speed);
-    setMotor(rightLift1, speed);
-    setMotor(rightLift2, speed);
+    setMotor(liftLeft, speed);
+    setMotor(liftRight, speed);
 }
 
 typedef struct controlLiftEncArgs
@@ -172,9 +152,8 @@ void controlLiftEnc(int speed, double encValue, bool waitForTaskEnd)
 
     if(!waitForTaskEnd)
     {
-        TaskHandle liftControl =
-            taskCreate(controlLiftEncTask,
-                       TASK_DEFAULT_STACK_SIZE, &args, TASK_PRIORITY_DEFAULT);
+        taskCreate(controlLiftEncTask,
+                   TASK_DEFAULT_STACK_SIZE, &args, TASK_PRIORITY_DEFAULT);
         delay(20);
     }
 

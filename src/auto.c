@@ -66,15 +66,11 @@ void moveCornerStar()
     {
         controlDriveEnc(127, RIGHT_TURN, 0.73);
         controlDriveEnc(127, FORWARD, 0.3);
-        controlDriveEnc(127, LEFT_STRAFE, 2);
-        controlDriveEnc(127, RIGHT_STRAFE, -0.34);
     }
 
     else if(color == RED)
     {
         controlDriveEnc(127, LEFT_TURN, -0.73);
-        controlDriveEnc(127, LEFT_STRAFE, 0.7);
-        controlDriveEnc(127, RIGHT_STRAFE, -0.3);
     }
     controlDriveEnc(127, FORWARD,   1.1);
 }
@@ -98,7 +94,6 @@ void starsOffFence()
 {
     controlLiftEnc(127, 20, true);
     controlLiftEnc(-127, -20, true);
-    controlDriveEnc(127, RIGHT_STRAFE, -1.2);
     controlLiftEnc(127, 10, true);
 }
 

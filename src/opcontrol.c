@@ -65,12 +65,9 @@ void operatorControl()
 {
     printf("opcontrol started\n\r");
     //used in a switch for different control modes.
-    typedef enum DriveMode {FRONT, BACK, LEFT, RIGHT}DriveMode;
+    typedef enum DriveMode {FRONT, BACK}DriveMode;
     DriveMode DriverMode = FRONT;
-    double turnDivisor = 1.50;
-    double turnDivisorLast = 1.50;
-    bool btn5uPressed = false;
-    bool btn5dPressed = false;
+    bool clawClosed = false;
 
     //in the case that the power expander isn't plugged in don't continue until
     //it's plugged in or overriden by placeing a jumper in digital pin 2.
@@ -94,55 +91,18 @@ void operatorControl()
 
         //if button 8U is pressed and has been debounced
         if (C1_8U)
+        {
             DriverMode = FRONT;        //Change mode to FRONT
-
+        }
 
         //if button 8D is pressed and has been debounced
         if(C1_8D)
+        {
             DriverMode = BACK;         //Change mode to BACK
-
-        //only FRONT is currently working corectly, this
-        //makes it impossible to use any other mode
-        DriverMode = FRONT;
-
-        if(C1_5U && !btn5uPressed && turnDivisor >= 1.0)
-        {
-            turnDivisor -= 0.25;
-            turnDivisorLast = turnDivisor;
-            btn5uPressed = true;
         }
-
-        else if(!C1_5U)
-        {
-            btn5uPressed = false;
-        }
-
-        if(C1_5D && !btn5dPressed)
-        {
-            turnDivisor += 0.25;
-            turnDivisorLast = turnDivisor;
-            btn5dPressed = true;
-        }
-
-        else if(!C1_5D)
-        {
-            btn5dPressed = false;
-        }
-
-        if(C1_6U)
-        {
-            turnDivisor = 1.0;
-        }
-
-        else
-        {
-            turnDivisor = turnDivisorLast;
-        }
-
         //deadzones for each of the joysticks to prevent motor whine
         if (abs(C1LY) > 20 || abs(C1LX) > 20 || abs(C1RX) > 20)
         {
-            printf("%f\n\r",turnDivisor);
             //switch to change driver configuration
             switch (DriverMode)
             {
@@ -150,39 +110,22 @@ void operatorControl()
             case FRONT: //First Mode (8U)
                 //pressing the left joystick forward
                 //will move the robot forward
-                setMotor(LFDrive,  C1LY + C1LX + (C1RX / turnDivisor));      //left front wheel
-                setMotor(RFDrive,  C1LY - C1LX - (C1RX / turnDivisor));     //left front wheel
-                setMotor(RBDriveI,  C1LY + C1LX - (C1RX / turnDivisor));     //right back wheel
-                setMotor(RBDriveO,  C1LY + C1LX - (C1RX / turnDivisor));     //left front wheel
-                setMotor(LBDriveI,  C1LY - C1LX + (C1RX / turnDivisor));     //left back wheel
-                setMotor(LBDriveO,  C1LY - C1LX + (C1RX / turnDivisor));     //left back wheel
+                setMotor(LFDrive,  C1LY + C1LX);
+                setMotor(LBDriveO,  C1LY + C1LX);
+                setMotor(LBDriveI,  C1LY + C1LX);
+                setMotor(RFDrive,  C1LY - C1LX);
+                setMotor(RBDriveO,  C1LY - C1LX);
+                setMotor(RBDriveI,  C1LY - C1LX);
                 break;
-
-            case LEFT: // Second Mode (8L)
-                //pressing the left joystick forward
-                //will move the robot to the left
-                // setMotor(LFDrive, -C1LY + C1LX + C1RX);    //left front wheel
-                //setMotor(RFDrive,  C1LY + C1LX - C1RX);    //right front wheel
-                //setMotor(RBDrive, -C1LY + C1LX - C1RX);    //right back wheel
-                //setMotor(LBDrive,  C1LY + C1LX + C1RX);    //left back wheel
-                break;
-
-            case RIGHT: // Third Mode (8R)
-                //pressing the left joystick forward
-                //will move the robot to the right
-                //setMotor(LFDrive,  C1LY - C1LX + C1RX);    //left front wheel
-                //setMotor(RFDrive, -C1LY - C1LX - C1RX);    //right front wheel
-                //setMotor(RBDrive,  C1LY - C1LX - C1RX);    //right back wheel
-                //setMotor(LBDrive, -C1LY - C1LX + C1RX);    //left back wheel
-                break;
-
             case BACK: // Fourth Mode (8D)
                 //pressing the left joystick forward
                 //will move the robot backward
-                //setMotor(LFDrive, -C1LY - C1LX + C1RX);	   //left front wheel
-                //setMotor(RFDrive, -C1LY + C1LX - C1RX);    //right front wheel
-                //setMotor(RBDrive, -C1LY - C1LX - C1RX);	   //right back wheel
-                //setMotor(LBDrive, -C1LY + C1LX + C1RX);	   //left back wheel
+                setMotor(LFDrive, -C1LY + C1LX);
+                setMotor(LBDriveO, -C1LY + C1LX);
+                setMotor(LBDriveI, -C1LY + C1LX);
+                setMotor(RFDrive, -C1LY - C1LX);
+                setMotor(RBDriveO, -C1LY - C1LX);
+                setMotor(RBDriveI, -C1LY - C1LX);
                 break;
             }
         }
@@ -191,55 +134,55 @@ void operatorControl()
         else
         {
             setMotor(LFDrive, 0);
-            setMotor(RFDrive, 0);
-            setMotor(LBDriveI, 0);
             setMotor(LBDriveO, 0);
-            setMotor(RBDriveI, 0);
+            setMotor(LBDriveI, 0);
+            setMotor(RFDrive, 0);
             setMotor(RBDriveO, 0);
+            setMotor(RBDriveI, 0);
         }
 
-        if(isJoystickConnected(2) && abs(C2LY) > 20)
+        ////////
+        //lift//
+        ////////
+        if(abs(C1RY) > 15)
         {
-            setMotor(leftLift1,  C2LY);
-            setMotor(leftLift2,  C2LY);
-            setMotor(rightLift1, C2LY);
-            setMotor(rightLift2, C2LY);
+            setMotor(liftLeft, -C1RY);
+            setMotor(liftRight, -C1RY);
         }
 
-        else if(isJoystickConnected(2))
+        else
         {
-            setMotor(leftLift1, 0);
-            setMotor(leftLift2, 0);
-            setMotor(rightLift1, 0);
-            setMotor(rightLift2, 0);
+            setMotor(liftLeft, 0);
+            setMotor(liftRight, 0);
         }
 
-        else if(!isJoystickConnected(2))
+        ////////
+        //claw//
+        ////////
+        if(C1_5D)
         {
-            if(C1_6U)
-            {
-                setMotor(leftLift1, 127);
-                setMotor(leftLift2, 127);
-                setMotor(rightLift1, 127);
-                setMotor(rightLift2, 127);
-            }
+            setMotor(claw1, 127);
+            setMotor(claw2, 127);
+            clawClosed = true;
+        }
 
-            else if(C1_6D)
-            {
-                setMotor(leftLift1, -127);
-                setMotor(leftLift2, -127);
-                setMotor(rightLift1, -127);
-                setMotor(rightLift2, -127);
-            }
+        else if(C1_5U)
+        {
+            setMotor(claw1, -127);
+            setMotor(claw2, -127);
+            clawClosed = false;
+        }
 
-            else
-            {
+        else if(clawClosed)
+        {
+            setMotor(claw1, 35);
+            setMotor(claw2, 35);
+        }
 
-                setMotor(leftLift1, 0);
-                setMotor(leftLift2, 0);
-                setMotor(rightLift1, 0);
-                setMotor(rightLift2, 0);
-            }
+        else
+        {
+            setMotor(claw1, 0);
+            setMotor(claw2, 0);
         }
 
         //motors can only be updated every 20 milliseconds

@@ -81,9 +81,6 @@ void initialize()
     lcdInit(uart1);
     lcdClear(uart1);
     newItem("no auton", NULL);
-    newItem("1: corner star", NULL);
-    newItem("2: 1 + return", NULL);
-    newItem("3: 1 + fence", NULL);
     selectionPot = autoSelect;
     taskCreate(LCDMenuTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
     printf("initialized\n\r");
