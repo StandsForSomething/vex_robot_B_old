@@ -68,6 +68,9 @@ void operatorControl()
     typedef enum DriveMode {FRONT, BACK}DriveMode;
     DriveMode DriverMode = FRONT;
     bool clawClosed = false;
+    int liftControl = 0;
+    bool clawCloseButton = false;
+    bool clawOpenButton = false;
 
     //in the case that the power expander isn't plugged in don't continue until
     //it's plugged in or overriden by placeing a jumper in digital pin 2.
@@ -144,11 +147,24 @@ void operatorControl()
         ////////
         //lift//
         ////////
-        if(abs(C1RY) > 15)
+        if(!isJoystickConnected(2))
         {
-            setMotor(liftLeft, -C1RY);
-            setMotor(liftRight1, -C1RY);
-            setMotor(liftRight2, -C1RY);
+            liftControl = -C1RY;
+            clawCloseButton = C1_5D;
+            clawOpenButton = C1_5U;
+        }
+
+        else
+        {
+            liftControl = -C2RY;
+            clawCloseButton = C2_5D;
+            clawOpenButton = C2_5U;
+        }
+        if(abs(liftControl) > 15)
+        {
+            setMotor(liftLeft, liftControl);
+            setMotor(liftRight1, liftControl);
+            setMotor(liftRight2, liftControl);
         }
 
         else
@@ -161,13 +177,13 @@ void operatorControl()
         ////////
         //claw//
         ////////
-        if(C1_5D)
+        if(clawCloseButton)
         {
             setMotor(claw, 127);
             clawClosed = true;
         }
 
-        else if(C1_5U)
+        else if(clawOpenButton)
         {
             setMotor(claw, -127);
             clawClosed = false;
