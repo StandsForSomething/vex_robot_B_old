@@ -110,7 +110,8 @@ void controlDriveEnc(int speed, direction dir, double counts)
 void controlLift(int speed)
 {
     setMotor(liftLeft, speed);
-    setMotor(liftRight, speed);
+    setMotor(liftRight1, speed);
+    setMotor(liftRight2, speed);
 }
 
 typedef struct controlLiftEncArgs
@@ -134,7 +135,6 @@ void controlLiftEncTask(void *funcArgs)
             delay(20);
         }
     }
-
     else
     {
         while(getSensor(armEnc.parent) > args.encValue)

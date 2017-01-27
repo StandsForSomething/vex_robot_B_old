@@ -79,7 +79,7 @@ void operatorControl()
     //control loop
     while (1)
     {
-
+        printf("test\n\r");
         /////////
         //Drive//
         //////////////////////////////////////////////////////////////////////
@@ -101,7 +101,7 @@ void operatorControl()
             DriverMode = BACK;         //Change mode to BACK
         }
         //deadzones for each of the joysticks to prevent motor whine
-        if (abs(C1LY) > 20 || abs(C1LX) > 20 || abs(C1RX) > 20)
+        if (abs(C1LY) > 15 || abs(C1LX) >15 || abs(C1RX) > 15)
         {
             //switch to change driver configuration
             switch (DriverMode)
@@ -147,13 +147,15 @@ void operatorControl()
         if(abs(C1RY) > 15)
         {
             setMotor(liftLeft, -C1RY);
-            setMotor(liftRight, -C1RY);
+            setMotor(liftRight1, -C1RY);
+            setMotor(liftRight2, -C1RY);
         }
 
         else
         {
             setMotor(liftLeft, 0);
-            setMotor(liftRight, 0);
+            setMotor(liftRight1, 0);
+            setMotor(liftRight2, 0);
         }
 
         ////////
@@ -161,28 +163,24 @@ void operatorControl()
         ////////
         if(C1_5D)
         {
-            setMotor(claw1, 127);
-            setMotor(claw2, 127);
+            setMotor(claw, 127);
             clawClosed = true;
         }
 
         else if(C1_5U)
         {
-            setMotor(claw1, -127);
-            setMotor(claw2, -127);
+            setMotor(claw, -127);
             clawClosed = false;
         }
 
         else if(clawClosed)
         {
-            setMotor(claw1, 35);
-            setMotor(claw2, 35);
+            setMotor(claw, 25);
         }
 
         else
         {
-            setMotor(claw1, 0);
-            setMotor(claw2, 0);
+            setMotor(claw, 0);
         }
 
         //motors can only be updated every 20 milliseconds
