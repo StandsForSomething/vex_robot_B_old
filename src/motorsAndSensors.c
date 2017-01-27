@@ -26,6 +26,8 @@ motor claw = {1, false};
 ///////////
 //digital
 sensor powerExpandJumper = {10, DIGITAL, true};
+sensor driveConfigJumper = {5, DIGITAL, true};
+
 //analog
 sensor powerExpand = {1, ANALOG, false};
 sensor autoSelect = {2, ANALOG, false};

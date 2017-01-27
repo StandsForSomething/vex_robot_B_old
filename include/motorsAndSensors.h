@@ -21,6 +21,7 @@ extern motor claw; //port 1, not reversed
 
 //digital
 extern sensor powerExpandJumper;    //digital port 2, input, reversed
+extern sensor driveConfigJumper;
 
 //analog
 extern sensor powerExpand;         //analog port 1, not reversed
@@ -40,6 +41,7 @@ void encoderSetup();
 #define ARM_ENC_TOP 6
 #define ARM_ENC_BOT 7
 
+#define DRIVE_CONFIG_JUMP 5
 #define POWER_EXPAND_JUMP 10       //digital port 2
 
 #define POWER_EXPAND 13            //analog port 1

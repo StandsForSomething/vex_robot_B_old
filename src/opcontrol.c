@@ -71,6 +71,7 @@ void operatorControl()
     int liftControl = 0;
     bool clawCloseButton = false;
     bool clawOpenButton = false;
+    bool arcadeControl = getSensor(driveConfigJumper) ? true : false;
 
     //in the case that the power expander isn't plugged in don't continue until
     //it's plugged in or overriden by placeing a jumper in digital pin 2.
@@ -109,26 +110,25 @@ void operatorControl()
             //switch to change driver configuration
             switch (DriverMode)
             {
-
             case FRONT: //First Mode (8U)
                 //pressing the left joystick forward
                 //will move the robot forward
-                setMotor(LFDrive,  C1LY + C1LX);
-                setMotor(LBDriveO,  C1LY + C1LX);
-                setMotor(LBDriveI,  C1LY + C1LX);
-                setMotor(RFDrive,  C1LY - C1LX);
-                setMotor(RBDriveO,  C1LY - C1LX);
-                setMotor(RBDriveI,  C1LY - C1LX);
+                setMotor(LFDrive,  arcadeControl ? C1LY + C1LX : C1LY);
+                setMotor(LBDriveO, arcadeControl ? C1LY + C1LX : C1LY);
+                setMotor(LBDriveI, arcadeControl ? C1LY + C1LX : C1LY);
+                setMotor(RFDrive,  arcadeControl ? C1LY - C1LX : C1RY);
+                setMotor(RBDriveO, arcadeControl ? C1LY - C1LX : C1RY);
+                setMotor(RBDriveI, arcadeControl ? C1LY - C1LX : C1RY);
                 break;
             case BACK: // Fourth Mode (8D)
                 //pressing the left joystick forward
                 //will move the robot backward
-                setMotor(LFDrive, -C1LY + C1LX);
-                setMotor(LBDriveO, -C1LY + C1LX);
-                setMotor(LBDriveI, -C1LY + C1LX);
-                setMotor(RFDrive, -C1LY - C1LX);
-                setMotor(RBDriveO, -C1LY - C1LX);
-                setMotor(RBDriveI, -C1LY - C1LX);
+                setMotor(LFDrive,  arcadeControl ? -C1LY + C1LX : -C1LY);
+                setMotor(LBDriveO, arcadeControl ? -C1LY + C1LX : -C1LY);
+                setMotor(LBDriveI, arcadeControl ? -C1LY + C1LX : -C1LY);
+                setMotor(RFDrive,  arcadeControl ? -C1LY - C1LX : -C1RY);
+                setMotor(RBDriveO, arcadeControl ? -C1LY - C1LX : -C1RY);
+                setMotor(RBDriveI, arcadeControl ? -C1LY - C1LX : -C1RY);
                 break;
             }
         }
@@ -149,7 +149,26 @@ void operatorControl()
         ////////
         if(!isJoystickConnected(2))
         {
-            liftControl = -C1RY;
+            if(arcadeControl)
+            {
+                liftControl = -C1RY;
+            }
+
+            else if(C1_6D)
+            {
+                liftControl = 127;
+            }
+
+            else if(C1_6U)
+            {
+                liftControl = -127;
+            }
+
+            else
+            {
+                liftControl = 0;
+            }
+
             clawCloseButton = C1_5D;
             clawOpenButton = C1_5U;
         }

@@ -57,6 +57,7 @@ void initializeIO()
     pinMode(ARM_ENC_BOT, INPUT);
     pinMode(POWER_EXPAND_JUMP, INPUT);
     pinMode(POWER_EXPAND, INPUT_ANALOG);
+    pinMode(DRIVE_CONFIG_JUMP, INPUT);
 }
 
 /*
