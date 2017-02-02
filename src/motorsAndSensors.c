@@ -14,9 +14,9 @@ motor RBDrive = {5, true};
 
 
 //lift motors
-motor liftLeft1Y = {3, false};
+motor liftLeft1Y = {3, true};
 motor liftleft2 = {2, true};
-motor liftRight1Y = {8, true};
+motor liftRight1Y = {8, false};
 motor liftRight2 = {9, false};
 //claw motors
 motor claw1 = {1, false};

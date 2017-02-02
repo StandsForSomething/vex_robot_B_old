@@ -3,19 +3,19 @@
 
 //left drive motors
 extern motor LFDrive;  //port 6, reversed
-extern motor LBDrive;  //port 7, not reversed
+extern motor LBDrive;  //port 7, reversed
 
 
 //right drive motors
 extern motor RFDrive;  //port 4, not reversed
-extern motor RBDrive;  //port 5, reversed
+extern motor RBDrive;  //port 5, not reversed
 
 
 //arm motors
-extern motor liftLeft1Y;  //port 3, not reversed
+extern motor liftLeft1Y;  //port 3,  reversed
 extern motor liftleft2;  //port 2, reversed
-extern motor liftRight1Y;  //port 8, reversed
-extern motor liftRight2;  //port 9, reversed
+extern motor liftRight1Y;  //port 8, not reversed
+extern motor liftRight2;  //port 9, not reversed
 //claw
 extern motor claw1; //port 1, not reversed
 extern motor claw2; //port 10, reversed
