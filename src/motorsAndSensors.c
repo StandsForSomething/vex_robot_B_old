@@ -1,22 +1,22 @@
-#include "main.h"
+# include "main.h"
 //////////
 //motors//
 //////////
 
 //left drive motors
-motor LFDrive = {2, true};
-motor LBDriveO = {3, false};
-motor LBDriveI = {4, true};
+motor LFDrive = {2, false};
+motor LBDriveO = {3, true};
+motor LBDriveI = {4, false};
 
 //right drive motors
-motor RFDrive = {7, false};
-motor RBDriveO = {8, true};
-motor RBDriveI = {9, false};
+motor RFDrive = {7, true};
+motor RBDriveO = {8, false};
+motor RBDriveI = {9, true};
 
 //lift motors
-motor liftLeft = {5, false};
-motor liftRight1 = {6, true};
-motor liftRight2 = {10, true};
+motor liftLeft = {5, true};
+motor liftRight1 = {6, false};
+motor liftRight2 = {10, false};
 
 //claw motors
 motor claw = {1, false};
