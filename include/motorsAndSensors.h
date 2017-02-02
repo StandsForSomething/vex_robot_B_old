@@ -2,32 +2,32 @@
 #define MOTORS_H_
 
 //left drive motors
-extern motor LFDrive;  //port 2, reversed
-extern motor LBDriveO;  //port 3, not reversed
-extern motor LBDriveI;  //port 4, reversed
+extern motor LFDrive;  //port 6, reversed
+extern motor LBDrive;  //port 7, not reversed
+
 
 //right drive motors
-extern motor RFDrive;  //port 7, not reversed
-extern motor RBDriveO;  //port 8, reversed
-extern motor RBDriveI;  //port 9, not reversed
+extern motor RFDrive;  //port 4, not reversed
+extern motor RBDrive;  //port 5, reversed
+
 
 //arm motors
-extern motor liftLeft;  //port 4, not reversed
-extern motor liftRight1;  //port 5, reversed
-extern motor liftRight2;  //port 10, reversed
-
+extern motor liftLeft1Y;  //port 3, not reversed
+extern motor liftleft2;  //port 2, reversed
+extern motor liftRight1Y;  //port 8, reversed
+extern motor liftRight2;  //port 9, reversed
 //claw
-extern motor claw; //port 1, not reversed
-
+extern motor claw1; //port 1, not reversed
+extern motor claw2; //port 10, reversed
 //digital
 extern sensor powerExpandJumper;    //digital port 2, input, reversed
-extern sensor driveConfigJumper;
+
 
 //analog
 extern sensor powerExpand;         //analog port 1, not reversed
 extern sensor autoSelect;        //analog port 2, not reversed
 
-extern encoder armEnc;
+
 extern encoder encoderLeft;
 extern encoder encoderRight;
 
@@ -38,12 +38,11 @@ void encoderSetup();
 #define ENC_RIGHT_BOT 9
 #define ENC_LEFT_TOP 11
 #define ENC_LEFT_BOT 12
-#define ARM_ENC_TOP 6
-#define ARM_ENC_BOT 7
 
-#define DRIVE_CONFIG_JUMP 5
+
 #define POWER_EXPAND_JUMP 10       //digital port 2
 
 #define POWER_EXPAND 13            //analog port 1
 #define AUTO_SELECT 14           //analog port 2
+#define ARM_POT 15 //analog port 3
 #endif

@@ -4,29 +4,29 @@
 //////////
 
 //left drive motors
-motor LFDrive = {2, true};
-motor LBDriveO = {3, false};
-motor LBDriveI = {4, true};
+motor LFDrive = {6, false};
+motor LBDrive = {7, false};
+
 
 //right drive motors
-motor RFDrive = {7, false};
-motor RBDriveO = {8, true};
-motor RBDriveI = {9, false};
+motor RFDrive = {4, true};
+motor RBDrive = {5, true};
+
 
 //lift motors
-motor liftLeft = {5, false};
-motor liftRight1 = {6, true};
-motor liftRight2 = {10, true};
-
+motor liftLeft1Y = {3, false};
+motor liftleft2 = {2, true};
+motor liftRight1Y = {8, true};
+motor liftRight2 = {9, false};
 //claw motors
-motor claw = {1, false};
-
+motor claw1 = {1, false};
+motor claw2 = {10,true};
 ///////////
 //sensors//
 ///////////
 //digital
 sensor powerExpandJumper = {10, DIGITAL, true};
-sensor driveConfigJumper = {5, DIGITAL, true};
+
 
 //analog
 sensor powerExpand = {1, ANALOG, false};
@@ -36,11 +36,10 @@ sensor armPot = {3, ANALOG, false};
 //encoders
 encoder encoderLeft;
 encoder encoderRight;
-encoder armEnc;
+
 
 void encoderSetup()
 {
-    initEncoderTW(&armEnc, 6, 7, false, TORQUE, COUNTS, 1.0);
     initEncoderTW(&encoderLeft, 11, 12, true, SPEED, ROTATIONS, 1.0);
     initEncoderTW(&encoderRight, 8, 9, false, SPEED, ROTATIONS, 1.0);
 }
