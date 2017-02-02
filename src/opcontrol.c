@@ -64,15 +64,21 @@
 void operatorControl()
 {
     printf("opcontrol started\n\r");
-    //used in a switch for different control modes.
-    typedef enum DriveMode {FRONT, BACK}DriveMode;
-    DriveMode DriverMode = FRONT;
-    bool clawClosed = false;
     int liftControl = 0;
-    bool clawCloseButton = false;
-    bool clawOpenButton = false;
-    bool arcadeControl = getSensor(driveConfigJumper) ? true : false;
-
+    int clawControl = 0;
+    int driveSpeed = 127;
+    int turnSpeed = 127;
+    int motorSpeed = 0;
+    int motorTurnSpeed = 0;
+    bool btn5uPushed = false;
+    bool btn5dPushed = false;
+    bool btn6uPushed = false;
+    bool btn6dPushed = false;
+    bool btn8uPushed = false;
+    bool btn8dPushed = false;
+    bool btn8lPushed = false;
+    bool btn8rPushed = false;
+    
     //in the case that the power expander isn't plugged in don't continue until
     //it's plugged in or overriden by placeing a jumper in digital pin 2.
     //this makes sure the robot can't move unless the issue is fixed becuase once
@@ -83,65 +89,135 @@ void operatorControl()
     //control loop
     while (1)
     {
-        printf("test\n\r");
-        /////////
-        //Drive//
-        //////////////////////////////////////////////////////////////////////
-        //I debounce buttons in button group 8.  It has occured to be that  //
-        //there probally is no reason for debounce.  I have no idea why they//
-        //are debounced so I will probally remove it later when I can make  //
-        //sure it isn't needed.                                             //
-        //////////////////////////////////////////////////////////////////////
-
-        //if button 8U is pressed and has been debounced
-        if (C1_8U)
+        if(!isJoystickConnected(2))
         {
-            DriverMode = FRONT;        //Change mode to FRONT
-        }
-
-        //if button 8D is pressed and has been debounced
-        if(C1_8D)
-        {
-            DriverMode = BACK;         //Change mode to BACK
-        }
-        //deadzones for each of the joysticks to prevent motor whine
-        if (abs(C1LY) > 15 || abs(C1LX) >15 || abs(C1RX) > 15)
-        {
-            //switch to change driver configuration
-            switch (DriverMode)
+            if(C1_8U && !btn8uPushed && !btn8dPushed)
             {
-            case FRONT: //First Mode (8U)
-                //pressing the left joystick forward
-                //will move the robot forward
-                setMotor(LFDrive,  arcadeControl ? C1LY + C1LX : C1LY);
-                setMotor(LBDriveO, arcadeControl ? C1LY + C1LX : C1LY);
-                setMotor(LBDriveI, arcadeControl ? C1LY + C1LX : C1LY);
-                setMotor(RFDrive,  arcadeControl ? C1LY - C1LX : C1RY);
-                setMotor(RBDriveO, arcadeControl ? C1LY - C1LX : C1RY);
-                setMotor(RBDriveI, arcadeControl ? C1LY - C1LX : C1RY);
-                break;
-            case BACK: // Fourth Mode (8D)
-                //pressing the left joystick forward
-                //will move the robot backward
-                setMotor(LFDrive,  arcadeControl ? -C1LY + C1LX : -C1LY);
-                setMotor(LBDriveO, arcadeControl ? -C1LY + C1LX : -C1LY);
-                setMotor(LBDriveI, arcadeControl ? -C1LY + C1LX : -C1LY);
-                setMotor(RFDrive,  arcadeControl ? -C1LY - C1LX : -C1RY);
-                setMotor(RBDriveO, arcadeControl ? -C1LY - C1LX : -C1RY);
-                setMotor(RBDriveI, arcadeControl ? -C1LY - C1LX : -C1RY);
-                break;
+                driveSpeed += 10;
+                btn8uPushed = true;
             }
+
+            else if(!C1_8U && btn8uPushed)
+            {
+                btn8uPushed = false;
+            }
+
+            else if(C1_8D && !btn8dPushed && !btn8uPushed)
+            {
+                driveSpeed -= 10;
+                btn8dPushed = true;
+            }
+
+            else if(!C1_8D && btn8dPushed)
+            {
+                btn8dPushed = false;
+            }
+
+            if(C1_8R && !btn8rPushed && !btn8lPushed)
+            {
+                turnSpeed -= 10;
+                btn8rPushed = true;
+            }
+
+            else if(!C1_8R && btn8rPushed)
+            {
+                btn8rPushed = false;
+            }
+
+            else if(C1_8L && !btn8lPushed && !btn8rPushed)
+            {
+                driveSpeed += 10;
+                btn8lPushed = true;
+            }
+
+            else if(!C1_8L && btn8lPushed)
+            {
+                btn8lPushed = false;
+            }
+            
+            if(C1_5U && !btn5uPushed && !btn5dPushed)
+            {
+                motorSpeed = driveSpeed;
+                btn5uPushed = true;
+            }
+
+            else if(!C1_5U && btn5uPushed)
+            {
+                btn5uPushed = false;
+            }
+
+            else if(C1_5D && !btn5dPushed && !btn5uPushed)
+            {
+                motorSpeed = -driveSpeed;
+                btn5dPushed = true;
+            }
+
+            else if(!C1_5D && btn5dPushed)
+            {
+                btn5dPushed = false;
+            }
+
+            if(!C1_5U && !C1_5D)
+            {
+                motorSpeed = 0;
+            }
+
+            if(C1_6U && !btn6uPushed && !btn6dPushed)
+            {
+                motorTurnSpeed = turnSpeed;
+                btn6uPushed = true;
+            }
+            else if(!C1_6U && btn6uPushed)
+            {
+                btn6uPushed = false;
+            }
+
+            else if(C1_6D && !btn6dPushed && !btn6uPushed)
+            {
+                motorTurnSpeed = -turnSpeed;
+                btn6dPushed = true;
+            }
+
+            else if(!C1_6D && btn6dPushed)
+            {
+                btn6dPushed = false;
+            }
+
+            if(!C1_6U && !C1_6D)
+            {
+                motorTurnSpeed = 0;
+            }
+
+            setMotor(LFDrive,  motorSpeed + motorTurnSpeed);
+            setMotor(LBDriveO, motorSpeed + motorTurnSpeed);
+            setMotor(LBDriveI, motorSpeed + motorTurnSpeed);
+            setMotor(RFDrive,  motorSpeed - motorTurnSpeed);
+            setMotor(RBDriveO, motorSpeed - motorTurnSpeed);
+            setMotor(RBDriveI, motorSpeed - motorTurnSpeed);
         }
 
-        //if joysticks are within deadzones set all drive motors to 0
         else
-        {
-            setMotor(LFDrive, 0);
-            setMotor(LBDriveO, 0);
-            setMotor(LBDriveI, 0);
-            setMotor(RFDrive, 0);
-            setMotor(RBDriveO, 0);
-            setMotor(RBDriveI, 0);
+        {            //deadzones for each of the joysticks to prevent motor whine
+            if (abs(C1LY) > 15 || abs(C1LX) >15 || abs(C1RX) > 15)
+            {
+                setMotor(LFDrive,  C1LY + C1RX);
+                setMotor(LBDriveO, C1LY + C1RX);
+                setMotor(LBDriveI, C1LY + C1RX);
+                setMotor(RFDrive,  C1LY - C1RX);
+                setMotor(RBDriveO, C1LY - C1RX);
+                setMotor(RBDriveI, C1LY - C1RX);
+            }
+
+            //if joysticks are within deadzones set all drive motors to 0
+            else
+            {
+                setMotor(LFDrive, 0);
+                setMotor(LBDriveO, 0);
+                setMotor(LBDriveI, 0);
+                setMotor(RFDrive, 0);
+                setMotor(RBDriveO, 0);
+                setMotor(RBDriveI, 0);
+            }
         }
 
         ////////
@@ -149,36 +225,16 @@ void operatorControl()
         ////////
         if(!isJoystickConnected(2))
         {
-            if(arcadeControl)
-            {
-                liftControl = -C1RY;
-            }
-
-            else if(C1_6D)
-            {
-                liftControl = 127;
-            }
-
-            else if(C1_6U)
-            {
-                liftControl = -127;
-            }
-
-            else
-            {
-                liftControl = 0;
-            }
-
-            clawCloseButton = C1_5D;
-            clawOpenButton = C1_5U;
+            liftControl = -C1LY;
+            clawControl = C1RY;
         }
 
         else
         {
-            liftControl = -C2RY;
-            clawCloseButton = C2_5D;
-            clawOpenButton = C2_5U;
+            liftControl = -C2LY;
+            clawControl = C2RY;
         }
+
         if(abs(liftControl) > 15)
         {
             setMotor(liftLeft, liftControl);
@@ -193,24 +249,13 @@ void operatorControl()
             setMotor(liftRight2, 0);
         }
 
+
         ////////
         //claw//
         ////////
-        if(clawCloseButton)
+        if(abs(clawControl) > 15)
         {
-            setMotor(claw, 127);
-            clawClosed = true;
-        }
-
-        else if(clawOpenButton)
-        {
-            setMotor(claw, -127);
-            clawClosed = false;
-        }
-
-        else if(clawClosed)
-        {
-            setMotor(claw, 25);
+            setMotor(claw, clawControl);
         }
 
         else
