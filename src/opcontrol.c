@@ -90,26 +90,171 @@
           //////////////////////////////////////////////////////////////////////
 
 
-if(isJoystickConnected(2))
-{
-          //deadzones for each of the joysticks to prevent motor whine
-          if (abs(C1LY) > 15 || abs(C1LX) >15)
-          {
-                  setMotor(LFDrive, C1LY + C1RX);
-                  setMotor(LBDrive, C1LY + C1RX);
-                  setMotor(RFDrive, C1LY - C1RX);
-                  setMotor(RBDrive, C1LY - C1RX);
+    printf("opcontrol started\n\r");
+    int liftControl = 0;
+    int clawControl = 0;
+    int driveSpeed = 127;
+    int turnSpeed = 127;
+    int motorSpeed = 0;
+    int motorTurnSpeed = 0;
+    bool btn5uPushed = false;
+    bool btn5dPushed = false;
+    bool btn6uPushed = false;
+    bool btn6dPushed = false;
+    bool btn8uPushed = false;
+    bool btn8dPushed = false;
+    bool btn8lPushed = false;
+    bool btn8rPushed = false;
 
-          }
+    //in the case that the power expander isn't plugged in don't continue until
+    //it's plugged in or overriden by placeing a jumper in digital pin 2.
+    //this makes sure the robot can't move unless the issue is fixed becuase once
+    //the robot moves it can't legally be fixed.  The option of using a jumper to
+    //continue is incase the issue can't be fixed.
+    //while(getSensor(powerExpand) < 1000 && getSensor(powerExpandJumper)){delay(20);}
 
-          //if joysticks are within deadzones set all drive motors to 0
-          else
-          {
-              setMotor(LFDrive, 0);
-              setMotor(LBDrive, 0);
-              setMotor(RFDrive, 0);
-              setMotor(RBDrive, 0);
-          }
+    //control loop
+    while (1)
+    {
+        if(!isJoystickConnected(2))
+        {
+            if(C1_8U && !btn8uPushed && !btn8dPushed)
+            {
+                driveSpeed += 10;
+                btn8uPushed = true;
+            }
+
+            else if(!C1_8U && btn8uPushed)
+            {
+                btn8uPushed = false;
+            }
+
+            else if(C1_8D && !btn8dPushed && !btn8uPushed)
+            {
+                driveSpeed -= 10;
+                btn8dPushed = true;
+            }
+
+            else if(!C1_8D && btn8dPushed)
+            {
+                btn8dPushed = false;
+            }
+
+            if(C1_8R && !btn8rPushed && !btn8lPushed)
+            {
+                turnSpeed -= 10;
+                btn8rPushed = true;
+            }
+
+            else if(!C1_8R && btn8rPushed)
+            {
+                btn8rPushed = false;
+            }
+
+            else if(C1_8L && !btn8lPushed && !btn8rPushed)
+            {
+                driveSpeed += 10;
+                btn8lPushed = true;
+            }
+
+            else if(!C1_8L && btn8lPushed)
+            {
+                btn8lPushed = false;
+            }
+
+            if(C1_5U && !btn5uPushed && !btn5dPushed)
+            {
+                motorSpeed = driveSpeed;
+                btn5uPushed = true;
+            }
+
+            else if(!C1_5U && btn5uPushed)
+            {
+                btn5uPushed = false;
+            }
+
+            else if(C1_5D && !btn5dPushed && !btn5uPushed)
+            {
+                motorSpeed = -driveSpeed;
+                btn5dPushed = true;
+            }
+
+            else if(!C1_5D && btn5dPushed)
+            {
+                btn5dPushed = false;
+            }
+
+            if(!C1_5U && !C1_5D)
+            {
+                motorSpeed = 0;
+            }
+
+            if(C1_6U && !btn6uPushed && !btn6dPushed)
+            {
+                motorTurnSpeed = turnSpeed;
+                btn6uPushed = true;
+            }
+            else if(!C1_6U && btn6uPushed)
+            {
+                btn6uPushed = false;
+            }
+
+            else if(C1_6D && !btn6dPushed && !btn6uPushed)
+            {
+                motorTurnSpeed = -turnSpeed;
+                btn6dPushed = true;
+            }
+
+            else if(!C1_6D && btn6dPushed)
+            {
+                btn6dPushed = false;
+            }
+
+            if(!C1_6U && !C1_6D)
+            {
+                motorTurnSpeed = 0;
+            }
+
+            setMotor(LFDrive,  motorSpeed + motorTurnSpeed);
+            setMotor(LBDrive, motorSpeed + motorTurnSpeed);
+            setMotor(RFDrive,  motorSpeed - motorTurnSpeed);
+            setMotor(RBDrive, motorSpeed - motorTurnSpeed);
+        }
+
+        else
+        {  //deadzones for each of the joysticks to prevent motor whine
+        if (abs(C1LY) > 15 || abs(C1LX) >15)
+        {
+                setMotor(LFDrive, C1LY + C1RX);
+                setMotor(LBDrive, C1LY + C1RX);
+                setMotor(RFDrive, C1LY - C1RX);
+                setMotor(RBDrive, C1LY - C1RX);
+
+        }
+
+        //if joysticks are within deadzones set all drive motors to 0
+        else
+        {
+            setMotor(LFDrive, 0);
+            setMotor(LBDrive, 0);
+            setMotor(RFDrive, 0);
+            setMotor(RBDrive, 0);
+        }
+      }
+        ////////
+        //lift//
+        ////////
+        if(!isJoystickConnected(2))
+        {
+            liftControl = -C1LY;
+            clawControl = C1RY;
+        }
+
+        else
+        {
+            liftControl = -C2LY;
+            clawControl = C2RY;
+        }
 }
 
           ////////

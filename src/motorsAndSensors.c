@@ -1,4 +1,4 @@
-#include "main.h"
+# include "main.h"
 //////////
 //motors//
 //////////
@@ -11,7 +11,6 @@ motor LBDrive = {7, false};
 //right drive motors
 motor RFDrive = {4, true};
 motor RBDrive = {5, true};
-
 
 //lift motors
 motor liftLeft1Y = {3, true};
