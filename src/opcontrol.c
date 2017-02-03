@@ -257,21 +257,6 @@
         }
 }
 
-          ////////
-          //lift//
-          ////////
-          if(isJoystickConnected(2))
-          {
-                liftControl = C2RY;
-                clawControl = C2LY;
-          }
-
-          else
-          {
-            liftControl = C1RY;
-            clawControl = C1LY;
-          }
-
           if(abs(liftControl) > 15)
           {
                 setMotor(liftLeft1Y, liftControl);
